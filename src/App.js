@@ -1,4 +1,4 @@
-import Presentation from "./Components/Presentation";
+import Presentation from "./Components/Presentation/Presentation";
 
 function App() {
   return (
