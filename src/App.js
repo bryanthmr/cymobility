@@ -1,17 +1,14 @@
-
-import Contact from "./Components/Contact/Contact"
+import MenuDest from "./Destination/MenuDest/MenuDest";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-          <Contact/>
       </header>
+       <MenuDest/>
+
     </div>
   );
-
 }
-//je  test encore
 
 export default App;
-
