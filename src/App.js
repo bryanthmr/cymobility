@@ -1,4 +1,4 @@
-import MenuDest from "./Destination/MenuDest/MenuDest";
+import MenuDest from "./Components/Destination/MenuDest/MenuDest";
 
 function App() {
   return (
