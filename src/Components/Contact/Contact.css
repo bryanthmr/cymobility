@@ -1,0 +1,68 @@
+html {
+    background-color: #001527;
+}
+
+#contactContent {
+    display: flex;
+    height: 600px;
+    padding-top: 0 px;
+    margin-top: 0px;
+}
+
+#adressesContent {
+    background-color: #FC8823;
+    display: flex;
+    flex-direction: column; /* Pour afficher les éléments les uns au-dessus des autres */
+    justify-content: center; /* Pour centrer horizontalement */
+    align-items: center; /* Pour centrer verticalement */
+    height: 100%;
+    flex: 0.5;
+}
+
+#adresses {
+    text-align: left;
+}
+
+#formContent {
+    display: flex;
+    flex-direction: column; /* Pour afficher les éléments l'un au-dessus de l'autre */
+    justify-content: center; /* Pour centrer horizontalement */
+    align-items: center; /* Pour centrer verticalement */
+    height: 100%; /* Ajuster la hauteur pour centrer verticalement */
+    flex: 1;
+}
+
+.form-row {
+    display: flex;
+    justify-content: center; /* Pour centrer horizontalement */
+    align-items: center; /* Pour centrer verticalement */
+    gap: 40px; /* Espacement entre les colonnes */
+}
+
+.form-row > div {
+    flex: 1; /* Pour que les divs à l'intérieur prennent la même largeur */
+}
+
+.form-row input, #contactButton {
+    width: 100%; /* Les inputs et le bouton occupent toute la largeur de leur conteneur */
+    box-sizing: border-box; /* Inclure les bordures et les rembourrages dans la largeur */
+    border: 1px solid #FC8823;
+    outline: none;
+}
+
+label {
+    color: #FC8823;
+}
+
+#contactButton {
+    background-color: #FC8823;
+    height: 30px;
+    border-radius : 0;
+    border : none;
+}
+
+.form-row input {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    background-color: transparent;
+}
