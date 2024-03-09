@@ -1,0 +1,26 @@
+$color-background: #001527; //La couleur du background de toutes les pages
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  outline: none;
+  border: none;
+  text-decoration: none;
+
+  z-index: 1;
+  background-color:$color-background ;
+}
+
+
+// les titres h1 seront automatiquement centré avec une couleur dégradé et espacé de 15 px en haut et en bas
+h1,h2,h3,h4 {
+  background: -webkit-linear-gradient( right, #fc8823, #fd3f59);
+  font-family : fraunces;
+  text-align: center;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
