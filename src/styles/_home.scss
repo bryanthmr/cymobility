@@ -31,5 +31,91 @@
 
 
 
+  .nosServices{
+    background-color: #FC8823;
+  }
+
+  .nosServices h1{
+    margin: 0;
+    padding: 3%;
+    -webkit-text-fill-color: black;
+    font-family: emoji;
+    font-weight: lighter;
+
+  }
+
+
+  .cartes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-gap: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-bottom: 5%;
+    background-color: #FC8823;
+
+  }
+  .card{
+    display: flex; /* Utiliser Flexbox pour aligner les éléments */
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+
+
+  .card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    align-self: center;
+
+  }
+
+  .card-title{
+    font-size: large;
+    text-align: center;
+    display: flex;
+    margin: 10%;
+    justify-content: center;
+
+  }
+
+  .contact h1, h3{
+    -webkit-text-fill-color: white;
+    font-family: fraunces;
+    font-weight: lighter;
+
+  }
+
+  .contact h3{
+    margin: 0;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
