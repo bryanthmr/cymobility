@@ -1,12 +1,12 @@
 // App.js
 
 import React from 'react';
-import Test from "./component/accueil/test";
+import Home from "./component/accueil/Home";
 
 function App() {
     return (
         <div>
-            <Test />
+            <Home />
         </div>
     );
 }
