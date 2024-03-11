@@ -44,7 +44,7 @@ export default function Contact(){
                                 <input style={{height: '80px'}} id={'champContact'} type={'text'}/>
                             </div>
                         </div>
-                        <button id={'contactButton'}>Envoyer</button>
+                        <button id={'contactButton'}>Envoyer !</button>
                     </form>
                 </div>
             </div>
