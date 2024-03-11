@@ -1,0 +1,129 @@
+@import "./settings";
+
+.home{
+  .titre{
+    font-style: italic ;
+    font-family: "linotype didot";
+  }
+
+  .images {
+    width: 100%;
+    max-height: 2%;
+  }
+
+  .each-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .each-slide > img {
+    width: 100%;
+    height: 80vh;
+    object-fit: cover;
+  }
+
+  .react-slideshow-container svg {
+    background-color: transparent;
+  }
+
+
+
+  .nosServices{
+    background-color: #f0f5d9;
+    z-index : 1;
+  }
+
+  .nosServices h1{
+    margin: 0;
+    padding: 3%;
+    -webkit-text-fill-color: black;
+    font-family: emoji;
+    font-weight: lighter;
+
+  }
+
+
+  .cartes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-gap: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-bottom: 5%;
+    background-color: #f0f5d9;
+
+  }
+  .card{
+    display: flex; /* Utiliser Flexbox pour aligner les éléments */
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    background: linear-gradient(to right, #001527, #b1c6d5) ;
+  }
+
+  //linear-gradient(to right, #001527, #b1c6d5) ;
+
+  .card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    align-self: center;
+
+  }
+
+  .card-title{
+    font-size: large;
+    text-align: center;
+    display: flex;
+    margin: 10%;
+    justify-content: center;
+    background: transparent ;
+
+  }
+
+  .card-body{
+    background: linear-gradient(to right, #001527, #b1c6d5) ;
+
+  }
+
+  .contact h1, h3{
+    -webkit-text-fill-color: white;
+    font-family: fraunces;
+    font-weight: lighter;
+
+  }
+
+  .contact h3{
+    margin: 0;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
