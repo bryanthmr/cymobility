@@ -32,7 +32,8 @@
 
 
   .nosServices{
-    background-color: #FC8823;
+    background-color: #f0f5d9;
+    z-index : 1;
   }
 
   .nosServices h1{
@@ -52,7 +53,7 @@
     margin-left: 10%;
     margin-right: 10%;
     padding-bottom: 5%;
-    background-color: #FC8823;
+    background-color: #f0f5d9;
 
   }
   .card{
@@ -60,9 +61,10 @@
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
+    background: linear-gradient(to right, #001527, #b1c6d5) ;
   }
 
-
+  //linear-gradient(to right, #001527, #b1c6d5) ;
 
   .card-img-top {
     width: 100%;
@@ -78,6 +80,12 @@
     display: flex;
     margin: 10%;
     justify-content: center;
+    background: transparent ;
+
+  }
+
+  .card-body{
+    background: linear-gradient(to right, #001527, #b1c6d5) ;
 
   }
 
