@@ -1,12 +1,10 @@
+import Apropos from "./Components/Apropos/Apropos";
+import React from "react";
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-      </header>
-       
-
-    </div>
-  );
+    return (
+        <div >
+            <Apropos/>
+        </div>
+    );
 }
-
 export default App;
