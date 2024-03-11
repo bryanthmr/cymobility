@@ -1,14 +1,15 @@
-// App.js
 
-import React from 'react';
-import Home from "./Components/accueil/Home";
+import Contact from "./Components/Contact/Contact"
 
 function App() {
-    return (
-        <div>
-            <Home />
-        </div>
-    );
+  return (
+    <div className="App">
+      <header className="App-header">
+          <Contact/>
+      </header>
+    </div>
+  );
+
 }
 //je  test encore
 
