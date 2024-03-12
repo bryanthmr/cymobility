@@ -13,9 +13,6 @@ const Header = () => {
     const[AproposVisible,setAproposVisible]=useState(false);
     const[ConnexionVisible,setConnexionVisible]=useState(false);
 
-
-
-
     //behavior
 
     const handleVisible = (elt,state) => {
