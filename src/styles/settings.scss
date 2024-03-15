@@ -2,7 +2,7 @@ $color-background:#292F36 ; //La couleur du background de toutes les pages
 
 
 
-*{
+.home{
 
   color: white;
   z-index: 1;
@@ -10,13 +10,3 @@ $color-background:#292F36 ; //La couleur du background de toutes les pages
 }
 
 
-// les titres h1 seront automatiquement centré avec une couleur dégradé et espacé de 15 px en haut et en bas
-h1,h2,h3,h4 {
-  background: #f0f5d9;
-  font-family : fraunces;
-  text-align: center;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  padding-top: 15px;
-  padding-bottom: 15px;
-}

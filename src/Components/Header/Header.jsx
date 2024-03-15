@@ -1,7 +1,11 @@
 import React, {useState} from 'react';
-import "./Header.css";
+
 import Presentation from "../Presentation/Presentation";
 import logo from './logo1.png';
+import Home from "../accueil/Home";
+import "./Header.css";
+import Contact from "../Contact/Contact";
+
 const Header = () => {
 
     //state
@@ -71,38 +75,33 @@ const Header = () => {
         }
     }
 
-
     //printing
 
     return (
         <>
-            <header>
-
-
-                <nav>
-                    <img src={logo} alt="Logo" width="100px" height="100px" className="logo"/>
-
-
-                    <div className="menu">
+            <header className="header-background">
+                <nav className="menu-container">
+                    <img src={logo} alt="Logo" width="70px" height="70px" className="logo"/>
+                    <div className="menu-buttons">
                         <button onClick={() => handleVisible("accueil", true)}>Accueil</button>
                         <button onClick={() => handleVisible("presentation", true)}>Présentation</button>
                         <button onClick={() => handleVisible("destination", true)}>Destination</button>
                         <button onClick={() => handleVisible("contact", true)}>Contact</button>
                         <button onClick={() => handleVisible("apropos", true)}>À Propos</button>
-
-
                     </div>
-                    <div className="connexion">
+                    <div className="connexion-button">
                         <button onClick={() => handleVisible("connexion", true)}>Me connecter</button>
+                        <button onClick={() => handleVisible("inscription", true)}>M'inscrire</button>
+
                     </div>
-                    <Presentation isVisible={presentationVisible}/>
-
                 </nav>
-
-
             </header>
+            <Presentation isVisible={presentationVisible}/>
+            <Home isVisible={accueilVisible}/>
+            <Contact isVisible={ContactVisible} />
         </>
     );
+
 };
 
 export default Header;

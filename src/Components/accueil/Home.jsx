@@ -4,8 +4,7 @@ import '../../styles/_home.scss';
 import 'react-slideshow-image/dist/styles.css';
 import {Card} from 'react-bootstrap';
 
-
-const Home = () => {
+export default function Home({isVisible}) {
     const imagesList = [
         '/homeImage1.jpg',
         '/homeImage2.jpg',
@@ -17,11 +16,11 @@ const Home = () => {
     ];
 
 
-    return (
+    return isVisible?(
         <div className='home'>
 
             <div className='titre'>
-                <h1>Planifier votre mobilité international avec CyMobility</h1>
+                <span>Planifier votre mobilité international avec CyMobility</span>
             </div>
 
             <div className="images">
@@ -79,9 +78,8 @@ const Home = () => {
         </div>
 
 
-    )
-        ;
+    ):null;
+
 };
 
-export default Home;
 

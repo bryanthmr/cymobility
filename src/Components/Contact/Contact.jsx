@@ -1,11 +1,10 @@
 import "./Contact.css";
 
 
-export default function Contact(){
+export default function Contact({isVisible}){
 
-
-
-    return(
+    return isVisible?(
+        <div className="contact-page">
         <>
             <div id={'contactContent'}>
                 <div id={'adressesContent1'}>
@@ -49,5 +48,6 @@ export default function Contact(){
                 </div>
             </div>
         </>
-    )
+        </div>
+    ):null;
 }
