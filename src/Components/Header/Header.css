@@ -1,0 +1,54 @@
+/* Fond du header */
+.header-background {
+    background: #292F36;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 2px solid #f0f5d9;
+}
+.menu-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* Boutons dans le header */
+.menu-buttons {
+    display: flex;
+    justify-content: center;
+    margin-left: 10%;
+}
+
+.header-background button {
+    color: white;
+    background: #292F36;
+    font-family: "Linotype Didot";
+    font-style: italic;
+    font-size: 22px;
+    transition:  1s;
+    border: none;
+    width: auto;
+    height: 50px;
+    text-align: center;
+    white-space: nowrap;
+
+}
+.header-background .menu-buttons button{
+    margin-right: 10%;
+}
+
+.header-background button:hover {
+    background: rgba(240, 245, 217, 0.5);
+    border: 2px solid #f0f5d9;
+    color: #292F36;
+    border-radius: 10px;
+
+
+}
+
+/* Logo dans le header */
+.logo {
+    z-index: 1001;
+    background: none;
+    margin-top: 0.5%;
+    justify-content: left;
+}
+

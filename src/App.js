@@ -1,11 +1,9 @@
-import MenuDest from "./Components/Destination/MenuDest/MenuDest";
-
+import React from 'react';
+import Header from "./Components/Header/Header";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-      </header>
-       <MenuDest/>
+    <div >
+          <Header/>
 
     </div>
   );

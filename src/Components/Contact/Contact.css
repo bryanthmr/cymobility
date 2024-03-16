@@ -1,0 +1,94 @@
+.contact-page {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    background-color: #f0f5d9;
+}
+
+#contactContent {
+    display: flex;
+    justify-content: center;
+    height: calc(100vh - 60px);
+}
+
+.form-row {
+    display: flex;
+    justify-content: center; /* Pour centrer horizontalement */
+    align-items: center; /* Pour centrer verticalement */
+    gap: 40px; /* Espacement entre les colonnes */
+}
+
+.form-row > div {
+    flex: 1; /* Pour que les divs à l'intérieur prennent la même largeur */
+}
+
+.form-row input, #contactButton {
+    width: 100%; /* Les inputs et le bouton occupent toute la largeur de leur conteneur */
+    box-sizing: border-box; /* Inclure les bordures et les rembourrages dans la largeur */
+    border: 1px solid #292F36;
+    outline: none;
+}
+
+#contactButton {
+    color: #f0f5d9;
+    background-color: #292F36;
+    height: 30px;
+    border-radius : 0;
+    border : none;
+}
+
+.form-row input {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    background-color: transparent;
+}
+
+#formContent {
+    display: flex;
+    flex-direction: column; /* Pour afficher les éléments l'un au-dessus de l'autre */
+    justify-content: center; /* Pour centrer horizontalement */
+    align-items: center; /* Pour centrer verticalement */
+    flex: 2;
+    color: black;
+    padding: 20px;
+}
+
+/* text */
+#adressesContent2 > h2 {
+    color: hsl(0, 0%, 28%);
+    font-size: 24px!important;
+    font-weight: bold!important;
+    font-family: monospace;
+    letter-spacing: 3px!important;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+#adressesContent1 {
+    background: black;
+    margin-bottom: -60px;
+    display: flex;
+    flex-direction: column; /* Pour afficher les éléments les uns au-dessus des autres */
+    justify-content: center; /* Pour centrer horizontalement */
+}
+
+#adressesContent2{
+    padding: 64px;
+    background : linear-gradient(to right, hsl(54, 73%, 66%) 0, hsl(286, 83%, 35%) 10%, hsla(183, 73%, 65%, 0.85) 20%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 3s infinite linear;
+}
+
+@keyframes shine {
+    0% {
+        background-position: 0;
+    }
+    60% {
+        background-position: 600px;
+    }
+    100% {
+        background-position: 600px;
+    }
+}
