@@ -1,16 +1,12 @@
-// App.js
-
 import React from 'react';
-import Home from "./Components/accueil/Home";
-
+import Header from "./Components/Header/Header";
 function App() {
-    return (
-        <div>
-            <Home />
-        </div>
-    );
+  return (
+    <div >
+          <Header/>
+
+    </div>
+  );
 }
-//je  test encore
 
 export default App;
-

@@ -1,9 +1,24 @@
 @import "./settings";
 
 .home{
+  // les titres h1 seront automatiquement centré avec une couleur dégradé et espacé de 15 px en haut et en bas
+  h1,h2,h3,h4 {
+    background: #f0f5d9;
+    font-family : fraunces;
+    text-align: center;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
   .titre{
     font-style: italic ;
     font-family: "linotype didot";
+    display: flex;
+    justify-content: center;
+    font-size: 150%;
+
   }
 
   .images {
@@ -99,7 +114,6 @@
   .contact h3{
     margin: 0;
   }
-
 
 
 

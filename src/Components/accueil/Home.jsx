@@ -3,25 +3,31 @@ import {Slide} from "react-slideshow-image";
 import '../../styles/_home.scss';
 import 'react-slideshow-image/dist/styles.css';
 import {Card} from 'react-bootstrap';
+import homeImage1 from '../../img/homeImage1.jpg'
+import homeImage2 from '../../img/homeImage2.jpg'
+import homeImage3 from '../../img/homeImage3.jpg'
+import homeImage4 from '../../img/homeImage4.jpg'
+import homeImage5 from '../../img/homeImage5.jpg'
+import homeImage6 from '../../img/homeImage6.jpg'
+import homeImage7 from '../../img/homeImage7.jpg'
 
-
-const Home = () => {
+export default function Home({isVisible}) {
     const imagesList = [
-        '/homeImage1.jpg',
-        '/homeImage2.jpg',
-        '/homeImage3.jpg',
-        '/homeImage4.jpg',
-        '/homeImage5.jpg',
-        '/homeImage6.jpg',
-        '/homeImage7.jpg'
+        homeImage1,
+        homeImage2,
+        homeImage3,
+        homeImage4,
+        homeImage5,
+        homeImage6,
+        homeImage7
     ];
 
 
-    return (
+    return isVisible?(
         <div className='home'>
 
             <div className='titre'>
-                <h1>Planifier votre mobilité international avec CyMobility</h1>
+                <span>Planifier votre mobilité international avec CyMobility</span>
             </div>
 
             <div className="images">
@@ -40,7 +46,7 @@ const Home = () => {
 
                 <div className="cartes">
                     <Card className="card1">
-                        <Card.Img variant="top" src='/homeImage7.jpg'/>
+                        <Card.Img variant="top" src={homeImage7}/>
                         <Card.Body>
                             <Card.Title>Choisis ta destination </Card.Title>
 
@@ -48,7 +54,7 @@ const Home = () => {
                     </Card>
 
                     <Card className="card2">
-                        <Card.Img variant="top" src='/homeImage5.jpg'/>
+                        <Card.Img variant="top" src={homeImage5}/>
                         <Card.Body>
                             <Card.Title>Sélectionnes tes spécialités</Card.Title>
 
@@ -56,7 +62,7 @@ const Home = () => {
                     </Card>
 
                     <Card className="card3">
-                        <Card.Img variant="top" src='/homeImage6.jpg'/>
+                        <Card.Img variant="top" src={homeImage6}/>
                         <Card.Body>
                             <Card.Title>Découvres toutes les opportunités</Card.Title>
 
@@ -79,9 +85,8 @@ const Home = () => {
         </div>
 
 
-    )
-        ;
+    ):null;
+
 };
 
-export default Home;
 
