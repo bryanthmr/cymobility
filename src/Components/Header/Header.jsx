@@ -5,6 +5,7 @@ import logo from './logo1.png';
 import Home from "../accueil/Home";
 import "./Header.css";
 import Contact from "../Contact/Contact";
+import Login from "../Login/LoginForm";
 
 const Header = () => {
 
@@ -16,8 +17,6 @@ const Header = () => {
     const [ContactVisible,setContactVisible]=useState(false);
     const[AproposVisible,setAproposVisible]=useState(false);
     const[ConnexionVisible,setConnexionVisible]=useState(false);
-
-
 
 
     //behavior
@@ -99,6 +98,7 @@ const Header = () => {
             <Presentation isVisible={presentationVisible}/>
             <Home isVisible={accueilVisible}/>
             <Contact isVisible={ContactVisible} />
+            <Login isVisible={ConnexionVisible} />
         </>
     );
 
