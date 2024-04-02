@@ -17,6 +17,8 @@ const Header = () => {
     const [ContactVisible,setContactVisible]=useState(false);
     const[AproposVisible,setAproposVisible]=useState(false);
     const[ConnexionVisible,setConnexionVisible]=useState(false);
+    const[InscriptionVisible,setInscriptionVisible]=useState(false);
+
 
 
     //behavior
@@ -68,6 +70,13 @@ const Header = () => {
                     setActualComponent("connexion")
                 }
                 break;
+            case "inscription":
+                setInscriptionVisible(state);
+                if(state===true) {
+                    handleVisible(actualComponent, false);
+                    setActualComponent("inscription")
+                }
+                break;
             default:
                 console.log("error")
                 break;
@@ -80,7 +89,7 @@ const Header = () => {
         <>
             <header className="header-background">
                 <nav className="menu-container">
-                    <img src={logo} alt="Logo" width="70px" height="70px" className="logo"/>
+                    <img src={logo} alt="Logo" width="90px" height="90px" className="logo"/>
                     <div className="menu-buttons">
                         <button onClick={() => handleVisible("accueil", true)}>Accueil</button>
                         <button onClick={() => handleVisible("presentation", true)}>Présentation</button>
