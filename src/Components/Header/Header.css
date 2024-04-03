@@ -14,7 +14,7 @@
 .menu-buttons {
     display: flex;
     justify-content: center;
-    margin-left: 10%;
+    margin-left: 20%;
 }
 
 .header-background button {
@@ -32,7 +32,7 @@
 
 }
 .header-background .menu-buttons button{
-    margin-right: 10%;
+    margin-right: 15%;
 }
 
 .header-background button:hover {

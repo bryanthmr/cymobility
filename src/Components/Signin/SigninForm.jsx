@@ -31,13 +31,12 @@ export default function Signin({isVisible}){
                     </div>
                     <div className="input-box">
                         <div class="select-container">
-
-                        <select name="Metier">
-                            <option value="">Votre métier</option>
-                            <option value="Data Science">Etudiant</option>
-                            <option value="IA">Professeur</option>
-                            <option value="BI">Recruteur</option>
-                        </select>
+                            <select name="Metier">
+                                <option value="">Votre métier</option>
+                                <option value="Data Science">Etudiant</option>
+                                <option value="IA">Professeur</option>
+                                <option value="BI">Recruteur</option>
+                            </select>
                         </div>
                     </div>
                     <div className="remember-forgot">
@@ -54,3 +53,4 @@ export default function Signin({isVisible}){
 };
 
 //nom prenom email genre métier(liste déroulante) date de naissance
+//<label htmlFor="Métier">Métier: </label>
