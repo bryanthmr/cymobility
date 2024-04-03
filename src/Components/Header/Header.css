@@ -40,10 +40,17 @@
     border: 2px solid #f0f5d9;
     color: #292F36;
     border-radius: 10px;
-
-
 }
-
+.connexion-button button{
+    margin-right: 25%;
+    white-space: nowrap;
+    margin-left: -15%;
+}
+.connexion-button{
+    display: flex;
+    justify-content: center;
+    margin-left: 10%;
+}
 /* Logo dans le header */
 .logo {
     z-index: 1001;

@@ -6,7 +6,7 @@ import Home from "../accueil/Home";
 import "./Header.css";
 import Contact from "../Contact/Contact";
 import Login from "../Login/LoginForm";
-
+import Signin from "../Signin/SigninForm";
 const Header = () => {
 
     //state
@@ -108,6 +108,7 @@ const Header = () => {
             <Home isVisible={accueilVisible}/>
             <Contact isVisible={ContactVisible} />
             <Login isVisible={ConnexionVisible} />
+            <Signin isVisible={InscriptionVisible} />
         </>
     );
 
