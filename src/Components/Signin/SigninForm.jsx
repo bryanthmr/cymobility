@@ -30,12 +30,12 @@ export default function Signin({isVisible}){
 
                     </div>
                     <div className="input-box">
-                        <div class="select-container">
+                        <div className="select-container">
                             <select name="Metier">
                                 <option value="">Votre métier</option>
-                                <option value="Data Science">Etudiant</option>
-                                <option value="IA">Professeur</option>
-                                <option value="BI">Recruteur</option>
+                                <option value="Etudiant">Etudiant</option>
+                                <option value="Prof">Professeur</option>
+                                <option value="Recruteur">Recruteur</option>
                             </select>
                         </div>
                     </div>
