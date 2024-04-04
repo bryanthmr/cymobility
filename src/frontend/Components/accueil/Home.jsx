@@ -1,6 +1,6 @@
 import React from 'react';
 import {Slide} from "react-slideshow-image";
-import '../../styles/_home.scss';
+import './_home.scss';
 import 'react-slideshow-image/dist/styles.css';
 import {Card} from 'react-bootstrap';
 import homeImage1 from '../../img/homeImage1.jpg'
