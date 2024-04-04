@@ -5,6 +5,7 @@ import logo from './logo1.png';
 import Home from "../accueil/Home";
 import "./Header.css";
 import Contact from "../Contact/Contact";
+import MenuDest from "../Destination/MenuDest/MenuDest";
 
 const Header = () => {
 
@@ -99,6 +100,7 @@ const Header = () => {
             <Presentation isVisible={presentationVisible}/>
             <Home isVisible={accueilVisible}/>
             <Contact isVisible={ContactVisible} />
+            <MenuDest isVisible={destinationVisible} />
         </>
     );
 
