@@ -72,12 +72,6 @@ export default function Home({isVisible}) {
                 </div>
             </div>
 
-            <div className="contact">
-                <h1>Contact</h1>
-                <h3>Cergy, France</h3>
-                <h3>info@mysite.com</h3>
-                <h3>123-456-7890</h3>
-            </div>
 
 
 

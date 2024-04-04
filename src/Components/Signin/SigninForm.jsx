@@ -26,7 +26,7 @@ export default function Signin({isVisible}){
                         <FaLock className="icon"/>
                     </div>
                     <div className="input-box">
-                        <input type="date" placeholder='Date de naissance' required pattern="\d{4}-\d{2}-\d{2}"/>
+                        <input type="date" placeholder='Date de naissance' required/>
 
                     </div>
                     <div className="input-box">

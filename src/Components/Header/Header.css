@@ -58,4 +58,15 @@
     margin-top: 0;
     justify-content: left;
 }
+.contact h1, .contact h3{
+    font-family : fraunces;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
 
+.contact {
+    color: white;
+    z-index: 1;
+    background: #292F36;
+}

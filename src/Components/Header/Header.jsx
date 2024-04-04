@@ -106,9 +106,15 @@ const Header = () => {
             </header>
             <Presentation isVisible={presentationVisible}/>
             <Home isVisible={accueilVisible}/>
-            <Contact isVisible={ContactVisible} />
-            <Login isVisible={ConnexionVisible} />
-            <Signin isVisible={InscriptionVisible} />
+            <Contact isVisible={ContactVisible}/>
+            <Login isVisible={ConnexionVisible}/>
+            <Signin isVisible={InscriptionVisible}/>
+            <div className="contact">
+                <h1>Contact</h1>
+                <h3>Cergy, France</h3>
+                <h3>info@mysite.com</h3>
+                <h3>123-456-7890</h3>
+            </div>
         </>
     );
 
