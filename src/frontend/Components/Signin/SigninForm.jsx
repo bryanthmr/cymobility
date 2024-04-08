@@ -9,20 +9,20 @@ export default function Signin({isVisible}){
                 <form action="">
                     <h1>Sign In</h1>
                     <div className="input-box">
-                        <input type="text" placeholder="Name" required/>
+                        <input type="text" placeholder="Nom" required/>
                     </div>
                     <div className="input-box">
-                        <input type="text" placeholder="First Name" required/>
+                        <input type="text" placeholder="Prénom" required/>
                     </div>
                     <div className="input-box">
                         <input type="text" placeholder="Email" required/>
                     </div>
                     <div className="input-box">
-                        <input type="text" placeholder="Username" required/>
+                        <input type="text" placeholder="Numero Etudiant" required/>
                         <FaUser className="icon"/>
                     </div>
                     <div className="input-box">
-                        <input type="password" placeholder='Password' required/>
+                        <input type="password" placeholder='Mot de passe' required/>
                         <FaLock className="icon"/>
                     </div>
                     <div className="input-box">
@@ -40,11 +40,11 @@ export default function Signin({isVisible}){
                         </div>
                     </div>
                     <div className="remember-forgot">
-                        < label>< input type="checkbox"/>Remember me</label>
+                        < label>< input type="checkbox"/>Se rappeler de moi</label>
                     </div>
-                    <button type="submit">Sign In</button>
+                    <button type="submit">Inscription</button>
                     <div className="register-link">
-                        <p>Already have an account? <a href="#">Login</a></p>
+                        <p>Déjà inscris?<a href="#">Se connecter</a></p>
                     </div>
                 </form>
             </div>
