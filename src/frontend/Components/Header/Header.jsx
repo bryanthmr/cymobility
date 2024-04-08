@@ -5,6 +5,10 @@ import logo from './logo1.png';
 import Home from "../accueil/Home";
 import "./Header.css";
 import Contact from "../Contact/Contact";
+import Login from "../Login/LoginForm";
+import Signin from "../Signin/SigninForm";
+import Destination from "../Destination/Destination"
+import Apropos from "../Apropos/Apropos";
 
 const Header = () => {
 
@@ -16,7 +20,7 @@ const Header = () => {
     const [ContactVisible,setContactVisible]=useState(false);
     const[AproposVisible,setAproposVisible]=useState(false);
     const[ConnexionVisible,setConnexionVisible]=useState(false);
-
+    const[InscriptionVisible,setInscriptionVisible]=useState(false);
 
 
 
@@ -69,6 +73,13 @@ const Header = () => {
                     setActualComponent("connexion")
                 }
                 break;
+            case "inscription":
+                setInscriptionVisible(state);
+                if(state===true) {
+                    handleVisible(actualComponent, false);
+                    setActualComponent("inscription")
+                }
+                break;
             default:
                 console.log("error")
                 break;
@@ -81,7 +92,7 @@ const Header = () => {
         <>
             <header className="header-background">
                 <nav className="menu-container">
-                    <img src={logo} alt="Logo" width="70px" height="70px" className="logo"/>
+                    <img src={logo} alt="Logo" width="90px" height="90px" className="logo"/>
                     <div className="menu-buttons">
                         <button onClick={() => handleVisible("accueil", true)}>Accueil</button>
                         <button onClick={() => handleVisible("presentation", true)}>Présentation</button>
@@ -98,7 +109,18 @@ const Header = () => {
             </header>
             <Presentation isVisible={presentationVisible}/>
             <Home isVisible={accueilVisible}/>
-            <Contact isVisible={ContactVisible} />
+            <Contact isVisible={ContactVisible}/>
+            <Login isVisible={ConnexionVisible}/>
+            <Signin isVisible={InscriptionVisible}/>
+            <Destination isVisible={destinationVisible}/>
+            <Apropos isVisible={AproposVisible}/>
+            <div className="contact">
+
+                <h1>Contact</h1>
+                <h3>Cergy, France</h3>
+                <h3>info@mysite.com</h3>
+                <h3>123-456-7890</h3>
+            </div>
         </>
     );
 
