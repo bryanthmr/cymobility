@@ -24,23 +24,23 @@ export default function Contact({isVisible}){
                         <div className={'form-row'}>
                             <div>
                                 <label htmlFor={'nom'}>Nom</label>
-                                <input style={{height: '30px'}} id={'nom'} type={'text'}/>
+                                <input style={{height: '30px'}} id={'nom'} type={'text'} required/>
                             </div>
                             <div>
                                 <label htmlFor={'prenom'}>Prénom</label>
-                                <input style={{height: '30px' }} id={'prenom'} type={'text'}/>
+                                <input style={{height: '30px' }} id={'prenom'} type={'text'} required/>
                             </div>
                         </div>
                         <div className={'form-row'}>
                             <div>
-                                <label htmlFor={'email'}>Email *</label>
+                                <label htmlFor={'email'}>Email</label>
                                 <input style={{height: '30px' }} id={'email'} type={'email'} required/>
                             </div>
                         </div>
                         <div className={'form-row'}>
                             <div>
-                                <label htmlFor={'champContact'}>Contacter</label>
-                                <input style={{height: '80px'}} id={'champContact'} type={'text'}/>
+                                <label htmlFor={'champContact'}>Votre message: </label>
+                                <input style={{height: '80px'}} id={'champContact'} type={'text'} required/>
                             </div>
                         </div>
                         <button id={'contactButton'}>Envoyer !</button>

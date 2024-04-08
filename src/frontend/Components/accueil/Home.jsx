@@ -1,6 +1,6 @@
 import React from 'react';
 import {Slide} from "react-slideshow-image";
-import '../../styles/_home.scss';
+import './_home.scss';
 import 'react-slideshow-image/dist/styles.css';
 import {Card} from 'react-bootstrap';
 import homeImage1 from '../../img/homeImage1.jpg'
@@ -10,10 +10,11 @@ import homeImage4 from '../../img/homeImage4.jpg'
 import homeImage5 from '../../img/homeImage5.jpg'
 import homeImage6 from '../../img/homeImage6.jpg'
 import homeImage7 from '../../img/homeImage7.jpg'
+import World from '../../img/World.jpg'
 
 export default function Home({isVisible}) {
     const imagesList = [
-        homeImage1,
+        World,
         homeImage2,
         homeImage3,
         homeImage4,
@@ -72,12 +73,6 @@ export default function Home({isVisible}) {
                 </div>
             </div>
 
-            <div className="contact">
-                <h1>Contact</h1>
-                <h3>Cergy, France</h3>
-                <h3>info@mysite.com</h3>
-                <h3>123-456-7890</h3>
-            </div>
 
 
 

@@ -66,8 +66,8 @@
 }
 
 #adressesContent1 {
-    background: black;
-    margin-bottom: -60px;
+    background: #292F36;
+    margin-bottom: 0px;
     display: flex;
     flex-direction: column; /* Pour afficher les éléments les uns au-dessus des autres */
     justify-content: center; /* Pour centrer horizontalement */

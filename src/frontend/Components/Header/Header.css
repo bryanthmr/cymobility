@@ -14,7 +14,7 @@
 .menu-buttons {
     display: flex;
     justify-content: center;
-    margin-left: 10%;
+    margin-left: 20%;
 }
 
 .header-background button {
@@ -32,7 +32,7 @@
 
 }
 .header-background .menu-buttons button{
-    margin-right: 10%;
+    margin-right: 15%;
 }
 
 .header-background button:hover {
@@ -40,15 +40,33 @@
     border: 2px solid #f0f5d9;
     color: #292F36;
     border-radius: 10px;
-
-
 }
-
+.connexion-button button{
+    margin-right: 25%;
+    white-space: nowrap;
+    margin-left: -15%;
+}
+.connexion-button{
+    display: flex;
+    justify-content: center;
+    margin-left: 10%;
+}
 /* Logo dans le header */
 .logo {
     z-index: 1001;
     background: none;
-    margin-top: 0.5%;
+    margin-top: 0;
     justify-content: left;
 }
+.contact h1, .contact h3{
+    font-family : fraunces;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
 
+.contact {
+    color: white;
+    z-index: 1;
+    background: #1a1d21;
+}
