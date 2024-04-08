@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './SigninForm.css';
 import { FaUser, FaLock } from "react-icons/fa";
+import Login from "../Login/LoginForm";
 
 export default function Signin({isVisible}){
+
     return isVisible ? (
         <div className="login-page">
             <div className='wrapper'>
@@ -49,12 +51,14 @@ export default function Signin({isVisible}){
                     </div>
                     <button type="submit">Inscription</button>
                     <div className="register-link">
-                        <p>Déjà inscris?  <a href="#">Se connecter</a></p>
+                        <p>Déjà inscris?  <a onClick={() => handleClick()} href="#">Se connecter</a></p>
                     </div>
                 </form>
             </div>
         </div>
     ) : null;
+
+    <Login isVisible={ConnexionVisible}/>
 };
 
 //nom prenom email genre métier(liste déroulante) date de naissance
