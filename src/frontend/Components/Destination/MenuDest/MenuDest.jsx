@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
-import {isVisible} from "@testing-library/user-event/dist/utils";
 
 
-export default function MenuDest({isVisible}){
+
+export default function MenuDest(){
     //state
     const valeurTest = ["Angleterre","Allemagne","Suisse","Finlande","Etats-Unis","Corée du Sud","Japon"];
     const [data,setData] = useState("");
@@ -10,7 +10,7 @@ export default function MenuDest({isVisible}){
     useEffect(() => {
         const fetchData = async() => {
             try{
-                const response = await fetch("https://cymobility.go.yo.fr/api/test");
+                const response = await fetch("https://cymobility.go.yo.fr/api/data");
                 const result = await response.json();
                 setData(result);
             }
@@ -19,10 +19,10 @@ export default function MenuDest({isVisible}){
             }
 
         }
-        fetchData()
+        fetchData();
     }, []);
     //Printing
-    return isVisible ?(
+    return(
             <>
                 <table>
                     <tbody>
@@ -46,7 +46,7 @@ export default function MenuDest({isVisible}){
                     </tbody>
                 </table>
             </>
-        ):null;
+        )
 
 
 }

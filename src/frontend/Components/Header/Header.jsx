@@ -7,7 +7,9 @@ import "./Header.css";
 import Contact from "../Contact/Contact";
 import Login from "../Login/LoginForm";
 import Signin from "../Signin/SigninForm";
+import Destination from "../Destination/Destination"
 import Apropos from "../Apropos/Apropos";
+
 const Header = () => {
 
     //state
@@ -110,9 +112,10 @@ const Header = () => {
             <Contact isVisible={ContactVisible}/>
             <Login isVisible={ConnexionVisible}/>
             <Signin isVisible={InscriptionVisible}/>
+            <Destination isVisible={destinationVisible}/>
             <Apropos isVisible={AproposVisible}/>
-
             <div className="contact">
+
                 <h1>Contact</h1>
                 <h3>Cergy, France</h3>
                 <h3>info@mysite.com</h3>
