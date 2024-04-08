@@ -6,7 +6,7 @@ export default function Login({isVisible}){
         <div className="login-page">
         <div className='wrapper'>
             <form action="">
-                <h1>Login</h1>
+                <h1>Connexion</h1>
                 <div className="input-box">
                     <input type="text" placeholder="Numéro Etudiant" required/>
                     <FaUser className="icon"/>
@@ -22,7 +22,7 @@ export default function Login({isVisible}){
                 </div>
                 <button type="submit" >Connexion</button>
                 <div className="register-link">
-                    <p>Pas encore de compte?<a href="#">S'inscrire</a></p>
+                    <p>Pas encore de compte?  <a href="#">S'inscrire</a></p>
                 </div>
             </form>
         </div>
