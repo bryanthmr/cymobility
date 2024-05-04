@@ -3,7 +3,7 @@ const express = require('express');
 const maria = require("mariadb")
 
 const app = express();
-
+const nodemailer = require('nodemailer');
 const pool = maria.createPool({
   host: 'localhost', 
   user: 'myjuffzf_userTest',
@@ -12,6 +12,7 @@ const pool = maria.createPool({
   database: 'myjuffzf_test',
   connectionLimit: 5
 });
+app.use(express.json());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -19,11 +20,11 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
-app.get('/api/data', async  (req,res,next) => {
+app.get('/apiEya/data', async  (req,res,next) => {
     let conn;
 	try{
 		conn=await pool.getConnection();
-        const result=await pool.query('SELECT * FROM Etude')
+        const result=await pool.query('SELECT * FROM Eleve')
         res.status(200).send(result)
 	}
 	catch(error){
@@ -35,27 +36,39 @@ app.get('/api/data', async  (req,res,next) => {
 
 });
 
-app.use('/api/test', (req, res, next) => {
-    const stuff = [
-        {
-            _id: 'oeihfzeoi',
-            title: 'Mon premier objet',
-            description: 'Les infos de mon premier objet',
-            imageUrl: 'https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg',
-            price: 4900,
-            userId: 'qsomihvqios',
-        },
-        {
-            _id: 'oeihfzeomoihi',
-            title: 'Mon deuxième objet',
-            description: 'Les infos de mon deuxième objet',
-            imageUrl: 'https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg',
-            price: 2900,
-            userId: 'qsomihvqios',
-        },
-    ];
-    res.status(200).json(stuff);
+app.post('/apiEya/sendEmail', async (req, res) => {
+    const { nom, prenom, email, message } = req.body;
 
+    // création d'un transporter nodemailer
+    const transporter = nodemailer.createTransport({
+
+        auth: {
+            user: 'contact@cymobility.go.yo.fr',
+            pass: 'anNSF4m:5:a^:;4S',
+        },
+    });
+
+    // définition du message
+    const mailOptions = {
+        from: 'contact@cymobility.go.yo.fr',
+        to: email,
+        subject: 'Confirmation de votre message',
+        text: `Bonjour ${prenom} ${nom},\n\nMerci pour votre message :\n\n${message}\n\nCordialement,\nL'équipe de mon site`,
+    };
+
+    // envoi du message
+    await transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send('Erreur lors de l envoi du message test.');
+        } else {
+            console.log('Email sent: ' + info.response);
+            res.status(200).send('Votre message a été envoyé avec succès !');
+        }
+    });
 });
+
+
+
 
 module.exports = app;
