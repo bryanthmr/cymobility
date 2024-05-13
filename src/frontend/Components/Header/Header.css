@@ -67,6 +67,10 @@
 
 .contact {
     color: white;
-    z-index: 1;
     background: #1a1d21;
+}
+
+.ContactInfo {
+    text-align: center;
+    margin-right: 110px;
 }

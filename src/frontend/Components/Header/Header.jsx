@@ -22,8 +22,6 @@ const Header = () => {
     const[ConnexionVisible,setConnexionVisible]=useState(false);
     const[InscriptionVisible,setInscriptionVisible]=useState(false);
 
-
-
     //behavior
 
     const handleVisible = (elt,state) => {
@@ -34,9 +32,9 @@ const Header = () => {
             case "presentation":
                 setPresentationVisible(state);
                 if(state===true){
-                handleVisible(actualComponent,false);
-                setActualComponent("presentation")
-            }
+                    handleVisible(actualComponent,false);
+                    setActualComponent("presentation")
+                }
                 break;
             case "accueil":
                 setAccueilVisible(state);
@@ -110,16 +108,19 @@ const Header = () => {
             <Presentation isVisible={presentationVisible}/>
             <Home isVisible={accueilVisible}/>
             <Contact isVisible={ContactVisible}/>
-            <Login isVisible={ConnexionVisible}/>
-            <Signin isVisible={InscriptionVisible}/>
+            <Login isVisible={ConnexionVisible} showSignin={handleVisible}/>
+            <Signin isVisible={InscriptionVisible} showLogin={handleVisible}/>
             <Destination isVisible={destinationVisible}/>
             <Apropos isVisible={AproposVisible}/>
+
             <div className="contact">
 
                 <h1>Contact</h1>
-                <h3>Cergy, France</h3>
-                <h3>info@mysite.com</h3>
-                <h3>123-456-7890</h3>
+                <p className="ContactInfo">
+                    <h3>Cergy, France</h3>
+                    <h3>info@mysite.com</h3>
+                    <h3>123-456-7890</h3>
+                </p>
             </div>
         </>
     );
