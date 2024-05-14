@@ -24,7 +24,7 @@ app.get('/apiEya/data', async  (req,res,next) => {
     let conn;
 	try{
 		conn=await pool.getConnection();
-        const result=await pool.query('SELECT * FROM Eleve')
+        const result=await pool.query('SELECT * FROM Adresse')
         res.status(200).send(result)
 	}
 	catch(error){
@@ -42,9 +42,15 @@ app.post('/apiEya/sendEmail', async (req, res) => {
     // création d'un transporter nodemailer
     const transporter = nodemailer.createTransport({
 
+        host: 'smtp.example.com',
+        port: 465,
+        secure: true, // force SS
         auth: {
             user: 'contact@cymobility.go.yo.fr',
             pass: 'anNSF4m:5:a^:;4S',
+        },
+        tls: {
+            rejectUnauthorized: false, // désactive la vérification SSL
         },
     });
 

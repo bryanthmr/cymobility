@@ -12,19 +12,25 @@ export default function Contact({isVisible}){
         const message = document.getElementById('champContact').value;
 
         // envoi des données au serveur back-end
-        const response = await fetch('https://localhost:4200/apiEya/sendEmail', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ nom, prenom, email, message }),
-        });
+        try {
+            // envoi des données au serveur back-end
+            const response = await fetch('https://localhost:3000/apiEya/sendEmail', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ nom, prenom, email, message }),
+            });
 
-        // vérification de la réponse du serveur
-        if (response.ok) {
-            alert('Votre message a été envoyé avec succès !');
-        } else {
-            alert('Erreur lors de l envoi du message.');
+            // vérification de la réponse du serveur
+            if (response.ok) {
+                alert('Votre message a été envoyé avec succès !');
+            } else {
+                alert('Erreur lors de l envoi du message.');
+            }
+        } catch (error) {
+            console.error('Erreur lors de l\'envoi du message :', error);
+            alert('Une erreur s\'est produite lors de l\'envoi du message. Veuillez réessayer plus tard.');
         }
     };
     return isVisible?(
