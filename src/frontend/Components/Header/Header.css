@@ -69,4 +69,6 @@
     color: white;
     z-index: 1;
     background: #1a1d21;
+    text-align: center;
+    line-height: 40px;
 }

@@ -116,10 +116,10 @@ const Header = () => {
             <Apropos isVisible={AproposVisible}/>
             <div className="contact">
 
-                <h1>Contact</h1>
-                <h3>Cergy, France</h3>
-                <h3>info@mysite.com</h3>
-                <h3>123-456-7890</h3>
+                <h2>Contact</h2>
+                <h4 >Cergy, France</h4>
+                <h4>info@mysite.com</h4>
+                <h4>123-456-7890</h4>
             </div>
         </>
     );
