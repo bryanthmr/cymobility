@@ -5,7 +5,7 @@
 }
 
 .login-page{
-    font-family: "Linotype Didot";
+    font-family: "Linotype Didot", serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     display: flex;
