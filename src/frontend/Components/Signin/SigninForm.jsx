@@ -1,24 +1,9 @@
-import React, {useEffect, useState} from 'react';
+
+import React from 'react';
 import './SigninForm.css';
 import { FaUser, FaLock } from "react-icons/fa";
 
 export default function Signin({isVisible}){
-    const [data,setData] = useState("");
-
-    useEffect(() => {
-        const fetchData = async() => {
-            try{
-                const response = await fetch("https://cymobility.go.yo.fr/apiEya/data");
-                const result = await response.json();
-                setData(result);
-            }
-            catch(error){
-                console.log("error")
-            }
-
-        }
-        fetchData();
-    }, []);
     return isVisible ? (
         <div className="login-page">
             <div className='wrapper'>
@@ -69,8 +54,6 @@ export default function Signin({isVisible}){
                     </div>
                 </form>
             </div>
-            {data.map((elt)=> {<p>elt</p>})}
-
         </div>
     ) : null;
 };

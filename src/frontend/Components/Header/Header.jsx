@@ -1,3 +1,4 @@
+
 import React, {useState} from 'react';
 
 import Presentation from "../Presentation/Presentation";
@@ -34,9 +35,9 @@ const Header = () => {
             case "presentation":
                 setPresentationVisible(state);
                 if(state===true){
-                handleVisible(actualComponent,false);
-                setActualComponent("presentation")
-            }
+                    handleVisible(actualComponent,false);
+                    setActualComponent("presentation")
+                }
                 break;
             case "accueil":
                 setAccueilVisible(state);
