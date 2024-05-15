@@ -14,7 +14,7 @@ export default function Contact({isVisible}){
         // envoi des données au serveur back-end
         try {
             // envoi des données au serveur back-end
-            const response = await fetch('https://localhost:3000/apiEya/sendEmail', {
+            const response = await fetch('https://localhost:3000/apiBryan/sendEmail', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

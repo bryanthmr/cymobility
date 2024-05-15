@@ -1,9 +1,10 @@
 const express = require('express');
 
 const maria = require("mariadb")
+const bodyParser = require("body-parser");
 
 const app = express();
-const nodemailer = require('nodemailer');
+
 const pool = maria.createPool({
   host: 'localhost', 
   user: 'myjuffzf_userTest',
@@ -22,7 +23,7 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
-app.get('/apiFio/data', async  (req,res,next) => {
+app.get('/apiBryan/data', async  (req,res,next) => {
     let conn;
     const pays_choisi = "États-Unis";
     const specialite_choisi = "Réseaux et Sécurité";
@@ -36,56 +37,35 @@ app.get('/apiFio/data', async  (req,res,next) => {
             //'and et.specialite = ? \n' +
             '    and of.ID_appartement = ap.id_appart\n' +
             '    and of.id_etude = et.id_etude;', )// rajouter [pays_choisi, specialite_choisi] apres la virgule
-        const result2=await pool.query('SELECT * FROM Adresse')
-        const result3 = [];
-        result3[0] = result
-        result3[1] = result2
-        res.status(200).send(result3)
+
+
+        res.status(200).send(result)
 	}
 	catch(error){
 		res.status(404).send("Connexion ratée")
 	}
     finally {
-        if (conn) conn.end(); // libère la connexion
+        if (conn) await conn.end(); // libère la connexion
     }
 
 });
 
-
-
-
-
-
-app.post("/apiFio/addAdresse", async (req, res, next) => {
+app.get('/apiBryan/menuDest', async  (req,res,next) => {
     let conn;
-
-    try {
-
-        const { ville, rue, numero_voie, pays } = req.body;
-        conn = await pool.getConnection();
-        const response=await conn.query('INSERT INTO Adresse (ville, rue, numero_voie, pays) VALUES (?, ?, ?, ?)', [ville, rue, numero_voie, pays]);
-        //const response=await pool.query("SELECT * FROM Adresse");
-
-
-        res.status(200).send("");
-
-    } catch (error) {
-        console.error("Erreur lors de l'ajout de l'adresse :", error);
-        res.status(500).send("Erreur lors de l'ajout de l'adresse");
-    } finally {
-        if (conn) conn.end();
+    try{
+        conn=await pool.getConnection();
+        const result=await pool.query('SELECT pays FROM Adresse ')
+        res.status(200).send(result)
+    }
+    catch(error){
+        res.status(404).send("Connexion ratée")
+    }
+    finally {
+        if (conn) await conn.end(); // libère la connexion
     }
 
-    // envoi du message
-    await transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.log(error);
-            res.status(500).send('Erreur lors de l envoi du message test.');
-        } else {
-            console.log('Email sent: ' + info.response);
-            res.status(200).send('Votre message a été envoyé avec succès !');
-        }
-    });
 });
+
+
 
 module.exports = app;
