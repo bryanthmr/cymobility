@@ -1,0 +1,16 @@
+.specialite-select {
+    position: fixed;
+    margin-top: 90px;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 70px;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background-color: #57577a; /* bleu marine */
+    font-size: 16px;
+    color: #fff; /* texte en blanc pour une meilleure visibilité sur fond bleu marine */
+}
+
