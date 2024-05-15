@@ -1,6 +1,7 @@
 const express = require('express');
 
 const maria = require("mariadb")
+const {useState} = require("react");
 
 const app = express();
 
@@ -19,6 +20,10 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
+
+
+
+
 app.get('/apiLyl/data', async  (req,res,next) => {
     let conn;
     try{
@@ -38,7 +43,27 @@ app.get('/apiLyl/data', async  (req,res,next) => {
 });
 
 
+app.post("/apiLyl/ChoixSpe", async (req, res, next) => {
+    let conn;
 
+    try {
+
+        const choixSpe = req.body;
+
+        conn = await pool.getConnection();
+
+
+        res.status(200).send("");
+
+    } catch (error) {
+        console.error("Erreur lors de l'ajout de l'adresse :", error);
+        res.status(500).send("Erreur lors de l'ajout de l'adresse");
+    } finally {
+        if (conn) conn.end();
+    }
+
+
+});
 
 
 module.exports=app;

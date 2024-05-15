@@ -25,8 +25,32 @@ export default function MenuSpe () {
         fetchData(); // Ajouter cette ligne pour gérer les erreurs
     }, []);
 
-    const sendSpe = (text) => {
-        console.log('Texte du bouton:', text);
+    const sendSpe =  async (text) => {
+        // Création d'une nouvelle adresse
+
+        const specialiteChoisi = text;
+
+// Envoi de la nouvelle adresse à la route POST
+        await fetch("https://cymobility.go.yo.fr/apiLyl/ChoixSpe", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(specialiteChoisi),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur lors de l\'ajout de l\'adresse2');
+                }
+                console.log('Adresse ajoutée avec succès');
+
+            })
+            .catch(error => {
+                console.error('Erreur lors de l\'ajout de l\'adresse :', error);
+            });
+
+
+
     };
 
 
