@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Card } from 'react-bootstrap';
-import homeImage6 from '../../img/homeImage6.jpg';
-import './Destination.css';
-import MenuSpe from "./MenuSpe/MenuSpe";
+import '../Destination.css';
 
-export default function Destination({ isVisible }) {
+
+export default function MenuSpe () {
     const [specialites, setSpecialites] = useState([]);
 
     useEffect(() => {
@@ -27,14 +25,22 @@ export default function Destination({ isVisible }) {
         fetchData(); // Ajouter cette ligne pour gérer les erreurs
     }, []);
 
-    return isVisible ? (
+    return  (
             <>
+                <div className="specialite-select" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 
-                <MenuSpe/>
-               </>
+                    <table><tbody>
+                    <tr>
+                    {specialites && specialites.map((specialite, index) => (
+                        <td key={index}><button className={'button-17'}>{specialite.specialite}</button></td>
+                    ))}
+                    </tr>
+                    </tbody></table>
+                </div>
 
 
 
-        ) :
-        null;
+        </>
+                )
+
 }
