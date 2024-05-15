@@ -1,50 +1,46 @@
 import {useEffect, useState} from "react";
 
-
+import "./MenuDest.css"
 
 export default function MenuDest(){
     //state
-    const valeurTest = ["Angleterre","Allemagne","Suisse","Finlande","Etats-Unis","Corée du Sud","Japon"];
+
     const [data,setData] = useState("");
     //Behavior
     useEffect(() => {
         const fetchData = async() => {
             try{
-                const response = await fetch("https://cymobility.go.yo.fr/api/data");
+                const response = await fetch("https://cymobility.go.yo.fr/apiBryan/menuDest");
                 const result = await response.json();
+
+
                 setData(result);
             }
             catch(error){
-                console.log("error")
+                console.log(error)
             }
 
         }
-        fetchData();
+        fetchData().then();
     }, []);
     //Printing
     return(
             <>
+
+                <body id="MenuDest-body">
                 <table>
                     <tbody>
-                    {data ? (
 
-                        <tr>
-                            <td><p>{data[0]._id}</p></td>
-                        </tr>
 
-                    ) : (
-                        <tr>
-                            <td><p>Chargement...</p></td>
-                        </tr>
-                    )}
-                    {valeurTest.map((pays) => <tr>
+                    {data && data.map((pays,index) => <tr key={index}>
                         <td>
-                            <button>{pays}</button>
+                            <button class="MenuDest-bouton-bg">{pays.pays}</button>
                         </td>
                     </tr>)}
 
                     </tbody>
                 </table>
+                </body>
             </>
         )
 

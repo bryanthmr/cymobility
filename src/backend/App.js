@@ -9,7 +9,7 @@ const pool = maria.createPool({
   user: 'myjuffzf_userTest',
   password: 'L#NO5!NTlOO2@uT,Z5',
   port:'3306',
-  database: 'myjuffzf_test',
+  database: 'myjuffzf_Cymobility',
   connectionLimit: 5
 });
 
@@ -19,11 +19,11 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
-app.get('/api/data', async  (req,res,next) => {
+app.get('/apiBryan/menuDest', async  (req,res,next) => {
     let conn;
 	try{
 		conn=await pool.getConnection();
-        const result=await pool.query('SELECT * FROM Etude')
+        const result=await pool.query('SELECT pays FROM Adresse ')
         res.status(200).send(result)
 	}
 	catch(error){
@@ -32,29 +32,6 @@ app.get('/api/data', async  (req,res,next) => {
     finally {
         if (conn) conn.end(); // libère la connexion
     }
-
-});
-
-app.use('/api/test', (req, res, next) => {
-    const stuff = [
-        {
-            _id: 'oeihfzeoi',
-            title: 'Mon premier objet',
-            description: 'Les infos de mon premier objet',
-            imageUrl: 'https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg',
-            price: 4900,
-            userId: 'qsomihvqios',
-        },
-        {
-            _id: 'oeihfzeomoihi',
-            title: 'Mon deuxième objet',
-            description: 'Les infos de mon deuxième objet',
-            imageUrl: 'https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg',
-            price: 2900,
-            userId: 'qsomihvqios',
-        },
-    ];
-    res.status(200).json(stuff);
 
 });
 

@@ -1,6 +1,7 @@
 import imgAvion from "../../img/avionQuiVole.webp"
 import imgSpecialites from "../../img/specialites.webp"
 import imgOpportunites from "../../img/opportunites.webp"
+import "./Presentation.css"
 
 export default function Presentation({isVisible}){
     //state
@@ -10,6 +11,7 @@ export default function Presentation({isVisible}){
     //Printing
     return isVisible ? (
         <>
+            <body id="presentation-background">
             <h1>Planifier votre mobilité internationale avec CyMobility</h1>
             <p>CyMobility se distingue par son expertise dans la planification de la mobilité internationale des étudiants ingénieurs. Nous comprenons que chaque étudiant a des besoins et des aspirations uniques, c'est pourquoi nous adoptons une approche personnalisée pour chaque parcours. Notre processus de planification commence par une évaluation approfondie des objectifs académiques et professionnels de l'étudiant, suivi par l'élaboration d'un plan de mobilité sur mesure. Ce plan intègre des sélections de cours, des stages internationaux et des opportunités de recherche, assurant ainsi que chaque étudiant tire le maximum de son expérience à l'étranger tout en progressant efficacement dans son cursus d'ingénierie.</p>
             <br/>
@@ -38,6 +40,7 @@ export default function Presentation({isVisible}){
                     </tr>
                 </tbody>
             </table>
+            </body>
         </>
     ): null;
 
