@@ -2,7 +2,37 @@ import "./Contact.css";
 
 
 export default function Contact({isVisible}){
+    const sendEmail = async (e) => {
+        e.preventDefault(); // empêche le comportement par défaut du formulaire
 
+        // collecte des données du formulaire
+        const nom = document.getElementById('nom').value;
+        const prenom = document.getElementById('prenom').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('champContact').value;
+
+        // envoi des données au serveur back-end
+        try {
+            // envoi des données au serveur back-end
+            const response = await fetch('https://localhost:3000/apiEya/sendEmail', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ nom, prenom, email, message }),
+            });
+
+            // vérification de la réponse du serveur
+            if (response.ok) {
+                alert('Votre message a été envoyé avec succès !');
+            } else {
+                alert('Erreur lors de l envoi du message.');
+            }
+        } catch (error) {
+            console.error('Erreur lors de l\'envoi du message :', error);
+            alert('Une erreur s\'est produite lors de l\'envoi du message. Veuillez réessayer plus tard.');
+        }
+    };
     return isVisible?(
         <div className="contact-page">
         <>
@@ -43,7 +73,7 @@ export default function Contact({isVisible}){
                                 <input style={{height: '80px'}} id={'champContact'} type={'text'} required/>
                             </div>
                         </div>
-                        <button id={'contactButton'}>Envoyer !</button>
+                        <button id={'contactButton'} onClick={sendEmail}>Envoyer !</button>
                     </form>
                 </div>
             </div>
