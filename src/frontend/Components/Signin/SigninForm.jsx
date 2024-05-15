@@ -16,7 +16,7 @@ export default function Signin({ isVisible, showLogin }) {
         console.log("Fetching data with credentials:", credentials);
 
         try {
-            const response = await fetch("https://cymobility.go.yo.fr/apiTheo/inscription", {
+            const response = await fetch("https://cymobility.go.yo.fr/apiEya/inscription", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -62,7 +62,7 @@ export default function Signin({ isVisible, showLogin }) {
                             <input onChange={(e) => setMail(e.target.value)} value={mail} type="text" placeholder="Email" required />
                         </div>
                         <div className="input-box">
-                            <input onChange={(e) => setIdEleve(e.target.value)} value={idEleve} type="text" placeholder="Numero Etudiant" required />
+                            <input onChange={(e) => setIdEleve(e.target.value)} value={idEleve} type="number" placeholder="Numero Etudiant" required />
                             <FaUser className="icon" />
                         </div>
                         <div className="input-box">

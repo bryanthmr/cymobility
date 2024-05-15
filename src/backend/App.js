@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const maria = require("mariadb");
+const session = require('express-session');
+const maria = require('mariadb');
 
 const app = express();
 
@@ -10,19 +11,32 @@ const pool = maria.createPool({
     password: 'L#NO5!NTlOO2@uT,Z5',
     port: '3306',
     database: 'myjuffzf_Cymobility',
-    connectionLimit: 5
+    connectionLimit: 5,
 });
 
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
+    );
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
 
-app.post('/apiTheo/connexion', async (req, res, next) => {
+// Configuration de session
+app.use(
+    session({
+        secret: 'your_secret_key',
+        resave: false,
+        saveUninitialized: true,
+        cookie: { secure: false }, // Doit être true en production avec HTTPS
+    })
+);
+
+app.post('/apiEya/connexion', async (req, res, next) => {
     let conn;
     const { login, password } = req.body;
     try {
@@ -30,6 +44,7 @@ app.post('/apiTheo/connexion', async (req, res, next) => {
         const sql = 'SELECT * FROM Eleve WHERE id_eleve = ? AND mdp = ?';
         const result = await conn.query(sql, [login, password]);
         if (result.length > 0) {
+            req.session.user = { login }; // Stocker les informations de l'utilisateur dans la session
             res.status(200).send({ success: true, message: 'Connexion réussie' });
         } else {
             res.status(401).send({ success: false, message: 'Identifiants incorrects' });
@@ -41,22 +56,30 @@ app.post('/apiTheo/connexion', async (req, res, next) => {
     }
 });
 
-app.post('/apiTheo/inscription', async (req, res, next) => {
+app.post('/apiEya/inscription', async (req, res, next) => {
     let conn;
     const { nom1, nom2, mail, idEleve, password, date, niveauEtude } = req.body;
 
-    console.log("Received inscription data:", { nom1, nom2, mail, idEleve, password, date, niveauEtude });
+    console.log('Received inscription data:', { nom1, nom2, mail, idEleve, password, date, niveauEtude });
 
     try {
         conn = await pool.getConnection();
-        const sql = 'INSERT INTO Eleve (nom, prenom, mail, id_eleve, mdp, date, id_etude) VALUES (?, ?, ?, ?, ?, ?, (SELECT id_etude FROM Etude WHERE niveau = ?))';
+        const sql = 'INSERT INTO Eleve (nom, prenom, mail, id_eleve, mdp, date_naissance, id_etude) VALUES (?, ?, ?, ?, ?, ?, (SELECT id_etude FROM Etude WHERE niveau = ?))';
         const result = await conn.query(sql, [nom1, nom2, mail, idEleve, password, date, niveauEtude]);
         res.status(200).send({ success: true, message: 'Inscription réussie' });
     } catch (error) {
-        console.error("Database error:", error);
+        console.error('Database error:', error);
         res.status(500).send({ success: false, message: 'Erreur de connexion', error });
     } finally {
         if (conn) conn.end();
+    }
+});
+
+app.get('/apiEya/checkSession', (req, res) => {
+    if (req.session.user) {
+        res.status(200).send({ loggedIn: true, user: req.session.user });
+    } else {
+        res.status(401).send({ loggedIn: false });
     }
 });
 
