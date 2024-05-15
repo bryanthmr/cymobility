@@ -30,7 +30,7 @@ app.get('/apiFio/data', async  (req,res,next) => {
     const pays_choisi = "États-Unis";
     const specialite_choisi = "Réseaux et Sécurité";
     try{
-		conn=await pool.getConnection();
+        conn=await pool.getConnection();
         const result=await pool.query('SELECT of.id_offre, of.titre, of.description, of.mission, of.duree, of.date_priseDP, of.salaire, of.profil_recherche, en.nom, ad.ville, ap.type, et.niveau\n' +
             'FROM  Offre of,  Adresse ad ,  Entreprise en ,  Appartement ap ,  Etude et \n' +
             'where of.id_entreprise = en.id_entreprise\n' +
@@ -44,15 +44,16 @@ app.get('/apiFio/data', async  (req,res,next) => {
         result3[0] = result
         result3[1] = result2
         res.status(200).send(result3)
-	}
-	catch(error){
-		res.status(404).send("Connexion ratée")
-	}
+    }
+    catch(error){
+        res.status(404).send("Connexion ratée")
+    }
     finally {
         if (conn) conn.end(); // libère la connexion
     }
 
 });
+
 
 
 
