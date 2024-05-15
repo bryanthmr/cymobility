@@ -51,28 +51,27 @@ app.get('/apiFio/data', async  (req,res,next) => {
 
 //TEST EYA
 
-
-
 app.post("/apiFio/addAdresse", async (req, res, next) => {
     let conn;
 
     try {
         const { ville, rue, numero_voie, pays } = req.body;
 
-        conn = await pool.getConnection();
-        const response=await pool.query('INSERT INTO Adresse (ville, rue, numero_voie, pays) VALUES (?, ?, ?, ?)', [ville, rue, numero_voie, pays]);
-        //const response=await pool.query("SELECT * FROM Adresse");
+        // Validation des données (à faire)
 
-        res.status(200).send(response);
+        conn = await pool.getConnection();
+        await conn.query('INSERT INTO Adresse (ville, rue, numero_voie, pays) VALUES (?, ?, ?, ?)', [ville, rue, numero_voie, pays]);
+
+        res.status(200).send("Adresse ajoutée avec succès");
 
     } catch (error) {
         console.error("Erreur lors de l'ajout de l'adresse :", error);
         res.status(500).send("Erreur lors de l'ajout de l'adresse");
     } finally {
-        if (conn) conn.end();
+        if (conn) conn.release(); // Utilisez "release" plutôt que "end" pour les connexions pool
     }
-
 });
+
 
 
 
