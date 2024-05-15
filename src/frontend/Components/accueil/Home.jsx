@@ -72,16 +72,8 @@ export default function Home({isVisible}) {
 
                 </div>
             </div>
-
-
-
-
-
         </div>
-
-
     ):null;
-
 };
 
 

@@ -1,5 +1,5 @@
 const express = require('express');
-
+const bodyParser = require('body-parser');
 const maria = require("mariadb");
 
 const app = express();
@@ -8,10 +8,12 @@ const pool = maria.createPool({
     host: 'localhost',
     user: 'myjuffzf_userTest',
     password: 'L#NO5!NTlOO2@uT,Z5',
-    port:'3306',
-    database: 'myjuffzf_test',
+    port: '3306',
+    database: 'myjuffzf_Cymobility',
     connectionLimit: 5
 });
+
+app.use(bodyParser.json());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -19,20 +21,43 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
-app.get('/apiTheo/connexion', async  (req,res,next) => {
-    let conn;
-	try{
-		conn=await pool.getConnection();
-        const result=await pool.query('SELECT * FROM Eleve');
-        res.status(200).send(result);
-	}
-	catch(error){
-		res.status(404).send("Connexion ratée");
-	}
-    finally {
-        if (conn) conn.end(); // libère la connexion
-    }
 
+app.post('/apiTheo/connexion', async (req, res, next) => {
+    let conn;
+    const { login, password } = req.body;
+    try {
+        conn = await pool.getConnection();
+        const sql = 'SELECT * FROM Eleve WHERE id_eleve = ? AND mdp = ?';
+        const result = await conn.query(sql, [login, password]);
+        if (result.length > 0) {
+            res.status(200).send({ success: true, message: 'Connexion réussie' });
+        } else {
+            res.status(401).send({ success: false, message: 'Identifiants incorrects' });
+        }
+    } catch (error) {
+        res.status(500).send({ success: false, message: 'Erreur de connexion', error });
+    } finally {
+        if (conn) conn.end();
+    }
+});
+
+app.post('/apiTheo/inscription', async (req, res, next) => {
+    let conn;
+    const { nom1, nom2, mail, idEleve, password, date, niveauEtude } = req.body;
+
+    console.log("Received inscription data:", { nom1, nom2, mail, idEleve, password, date, niveauEtude });
+
+    try {
+        conn = await pool.getConnection();
+        const sql = 'INSERT INTO Eleve (nom, prenom, mail, id_eleve, mdp, date, id_etude) VALUES (?, ?, ?, ?, ?, ?, (SELECT id_etude FROM Etude WHERE niveau = ?))';
+        const result = await conn.query(sql, [nom1, nom2, mail, idEleve, password, date, niveauEtude]);
+        res.status(200).send({ success: true, message: 'Inscription réussie' });
+    } catch (error) {
+        console.error("Database error:", error);
+        res.status(500).send({ success: false, message: 'Erreur de connexion', error });
+    } finally {
+        if (conn) conn.end();
+    }
 });
 
 app.use('/api/test', (req, res, next) => {
@@ -55,7 +80,6 @@ app.use('/api/test', (req, res, next) => {
         },
     ];
     res.status(200).json(stuff);
-
 });
 
 module.exports = app;
