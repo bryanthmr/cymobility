@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import '../Destination.css';
+import '../MenuSpe.css';
 
 
 export default function MenuSpe () {
@@ -25,14 +25,20 @@ export default function MenuSpe () {
         fetchData(); // Ajouter cette ligne pour gérer les erreurs
     }, []);
 
+    const sendSpe = (text) => {
+        console.log('Texte du bouton:', text);
+    };
+
+
+
     return  (
             <>
-                <div className="specialite-select" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div className="specialite-select" >
 
                     <table><tbody>
                     <tr>
                     {specialites && specialites.map((specialite, index) => (
-                        <td key={index}><button className={'button-17'}>{specialite.specialite}</button></td>
+                        <td key={index}><button className={'button-17'} onClick={() => sendSpe(specialite.specialite)} >{specialite.specialite}</button></td>
                     ))}
                     </tr>
                     </tbody></table>

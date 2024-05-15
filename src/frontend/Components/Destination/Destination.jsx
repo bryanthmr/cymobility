@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
 import homeImage6 from '../../img/homeImage6.jpg';
-import './Destination.css';
+import './MenuSpe.css';
 import MenuSpe from "./MenuSpe/MenuSpe";
 
 export default function Destination({ isVisible }) {
