@@ -1,14 +1,14 @@
-.main-section {
+.apropos-page .main-section {
     display: flex;
     justify-content: center;
     height: calc(100vh - 60px);
 }
 
 
-.right-compartment {
+.apropos-page .right-compartment {
     flex: 2;
-    background-color: #f0f5d9;
-    color: black;
+    background-color: #f0f5d9; /#d6fff6;/
+color: black;
     padding: 20px;
     width: 70%;
     margin-bottom:0px;
@@ -16,20 +16,20 @@
 }
 
 
-.right-compartment > h2 {
+.apropos-page .right-compartment > h2 {
     font-size:40px;
     padding: 50px;
     margin-left:40%;
     color:purple;
     font-family: "Linotype Didot", serif;
 }
-h3{
+.apropos-page h3{
     font-size: 22px;
     font-family: "Linotype Didot", serif;
     letter-spacing: 0.2px!important;
     padding-left: 60px;
 }
-p{
+.apropos-page p{
     font-size: 18px;
     font-family:"Linotype Didot", serif;
     letter-spacing: 0.2px!important;
@@ -43,5 +43,6 @@ p{
 .logo2{
     width: 400px;
     height: 300px;
-    margin-left: 40%;
+    margin-left: 43%;
+
 }

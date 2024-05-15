@@ -4,7 +4,7 @@ import React from "react";
 
 export default function Apropos({isVisible}) {
     return isVisible?(
-        <div>
+        <div className="apropos-page">
 
             <>
                 <section className="main-section">

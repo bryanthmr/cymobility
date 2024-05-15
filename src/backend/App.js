@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const session = require('express-session');
 const maria = require('mariadb');
 
 const app = express();
@@ -26,16 +25,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// Configuration de session
-app.use(
-    session({
-        secret: 'your_secret_key',
-        resave: false,
-        saveUninitialized: true,
-        cookie: { secure: false }, // Doit être true en production avec HTTPS
-    })
-);
-
 app.post('/apiEya/connexion', async (req, res, next) => {
     let conn;
     const { login, password } = req.body;
@@ -44,7 +33,6 @@ app.post('/apiEya/connexion', async (req, res, next) => {
         const sql = 'SELECT * FROM Eleve WHERE id_eleve = ? AND mdp = ?';
         const result = await conn.query(sql, [login, password]);
         if (result.length > 0) {
-            req.session.user = { login }; // Stocker les informations de l'utilisateur dans la session
             res.status(200).send({ success: true, message: 'Connexion réussie' });
         } else {
             res.status(401).send({ success: false, message: 'Identifiants incorrects' });
@@ -72,14 +60,6 @@ app.post('/apiEya/inscription', async (req, res, next) => {
         res.status(500).send({ success: false, message: 'Erreur de connexion', error });
     } finally {
         if (conn) conn.end();
-    }
-});
-
-app.get('/apiEya/checkSession', (req, res) => {
-    if (req.session.user) {
-        res.status(200).send({ loggedIn: true, user: req.session.user });
-    } else {
-        res.status(401).send({ loggedIn: false });
     }
 });
 

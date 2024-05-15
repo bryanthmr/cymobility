@@ -8,7 +8,6 @@ import Login from '../Login/LoginForm';
 import Signin from '../Signin/SigninForm';
 import Destination from '../Destination/Destination';
 import Apropos from '../Apropos/Apropos';
-import { AuthContext } from '../../AuthContext'; // Importer le contexte d'authentification
 
 const Header = () => {
     // state
@@ -20,8 +19,6 @@ const Header = () => {
     const [AproposVisible, setAproposVisible] = useState(false);
     const [ConnexionVisible, setConnexionVisible] = useState(false);
     const [InscriptionVisible, setInscriptionVisible] = useState(false);
-
-    const { authState } = useContext(AuthContext); // Utiliser le contexte d'authentification
 
     // behavior
     const handleVisible = (elt, state) => {
@@ -98,19 +95,13 @@ const Header = () => {
                         <button onClick={() => handleVisible('apropos', true)}>À Propos</button>
                     </div>
                     <div className='connexion-button'>
-                        {authState.loggedIn ? (
-                            <span>Bienvenue, {authState.user.login}</span>
-                        ) : (
-                            <>
-                                <button onClick={() => handleVisible('connexion', true)}>Me connecter</button>
-                                <button onClick={() => handleVisible('inscription', true)}>M'inscrire</button>
-                            </>
-                        )}
+                        <button onClick={() => handleVisible('connexion', true)}>Me connecter</button>
+                        <button onClick={() => handleVisible('inscription', true)}>M'inscrire</button>
                     </div>
                 </nav>
             </header>
             <Presentation isVisible={presentationVisible} />
-            <Home isVisible={accueilVisible} showHome={handleVisible} />
+            <Home isVisible={accueilVisible} />
             <Contact isVisible={ContactVisible} />
             <Login isVisible={ConnexionVisible} showSignin={handleVisible} showHome={handleVisible} />
             <Signin isVisible={InscriptionVisible} showLogin={handleVisible} />
