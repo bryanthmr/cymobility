@@ -28,7 +28,7 @@ export default function Destination({isVisible}){
 
     // TEST EYA
 
-    const addAddress = () => {
+    const addAddress = async () => {
         // Création d'une nouvelle adresse
 
         const newAddress = {
@@ -39,7 +39,7 @@ export default function Destination({isVisible}){
         };
 
 // Envoi de la nouvelle adresse à la route POST
-        fetch("https://cymobility.go.yo.fr/apiFio/addAdresse", {
+        await fetch("https://cymobility.go.yo.fr/apiFio/addAdresse", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ export default function Destination({isVisible}){
         })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Erreur lors de l\'ajout de l\'adresse');
+                    throw new Error('Erreur lors de l\'ajout de l\'adresse2');
                 }
                 console.log('Adresse ajoutée avec succès');
 

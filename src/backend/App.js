@@ -1,6 +1,9 @@
 const express = require('express');
 
-const maria = require("mariadb")
+const maria = require("mariadb");
+
+const bodyParser = require("body-parser");
+
 
 const app = express();
 
@@ -12,6 +15,9 @@ const pool = maria.createPool({
   database: 'myjuffzf_test', // à changer
   connectionLimit: 5
 });
+
+app.use(bodyParser.json());
+app.use(express.json());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -49,7 +55,7 @@ app.get('/apiFio/data', async  (req,res,next) => {
 });
 
 
-//TEST EYA
+
 
 
 
@@ -57,13 +63,14 @@ app.post("/apiFio/addAdresse", async (req, res, next) => {
     let conn;
 
     try {
-        const { ville, rue, numero_voie, pays } = req.body;
 
+        const { ville, rue, numero_voie, pays } = req.body;
         conn = await pool.getConnection();
-        const response=await pool.query('INSERT INTO Adresse (ville, rue, numero_voie, pays) VALUES (?, ?, ?, ?)', [ville, rue, numero_voie, pays]);
+        const response=await conn.query('INSERT INTO Adresse (ville, rue, numero_voie, pays) VALUES (?, ?, ?, ?)', [ville, rue, numero_voie, pays]);
         //const response=await pool.query("SELECT * FROM Adresse");
 
-        res.status(200).send(response);
+
+        res.status(200).send("");
 
     } catch (error) {
         console.error("Erreur lors de l'ajout de l'adresse :", error);
