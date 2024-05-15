@@ -1,5 +1,4 @@
 /* Fond du header */
-
 .header-background {
     background: #292F36;
     width: 100%;
@@ -21,7 +20,7 @@
 .header-background button {
     color: white;
     background: #292F36;
-    font-family: "Linotype Didot", serif;
+    font-family: "Linotype Didot";
     font-style: italic;
     font-size: 22px;
     transition:  1s;
@@ -60,7 +59,7 @@
     justify-content: left;
 }
 .contact h1, .contact h3{
-    font-family: fraunces, serif;
+    font-family : fraunces;
     text-align: center;
     padding-top: 15px;
     padding-bottom: 15px;
@@ -69,5 +68,7 @@
 .contact {
     color: white;
     z-index: 1;
-    background: #292F36;
+    background: #1a1d21;
+    text-align: center;
+    line-height: 40px;
 }

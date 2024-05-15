@@ -1,0 +1,62 @@
+
+.destination {
+  .cartes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20%, 1fr)); /* Ajustez la largeur des cartes en fonction de vos besoins */
+    grid-column-gap: 4%; /* Ajustez cet espace selon vos préférences */
+    grid-row-gap: 4%;
+    margin:2%;
+
+  }
+
+  .card {
+    //display: flex;
+    flex-direction: column;
+    //justify-content: space-between;
+    width: initial;
+    height: initial;
+    background:linear-gradient(0deg, rgba(240,245,217, 0.5), rgba(240,245,217, 0.5)), url("../../img/homeImage6.jpg");
+    background-size: cover;
+    background-position: center;
+    border-radius:20px;
+    padding: 7%;
+
+    transition: all 900ms cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
+
+
+    &:hover {
+      transform: scale(0.98);
+      box-shadow: 0 0 5px -2px rgba(0, 0, 0, 0.3);
+
+    }
+
+
+  }
+
+
+
+  .card-title,
+  .card-header {
+    font-size: large;
+    text-align: center;
+    margin: 5px; /* Ajustez la marge selon vos préférences */
+    background: transparent;
+
+  }
+  .card-title{
+
+  }
+  .card-text {
+
+  }
+
+
+
+  .card-header {
+
+    font-size: large;
+    font-weight: bold;
+  }
+
+}

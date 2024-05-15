@@ -2,7 +2,7 @@ import './Apropos.css';
 
 export default function Apropos({isVisible}) {
     return isVisible?(
-        <div>
+        <div className={'apropos'}>
 
             <>
             <section className="main-section">
