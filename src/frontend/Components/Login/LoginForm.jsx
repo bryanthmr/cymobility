@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './LoginForm.css';
 import { FaUser, FaLock } from "react-icons/fa";
 
-export default function Login({ isVisible, showSignin }) {
+export default function Login({ isVisible, showSignin ,showHome}) {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
 
@@ -11,7 +11,7 @@ export default function Login({ isVisible, showSignin }) {
         console.log("Fetching data with credentials:", credentials);
 
         try {
-            const response = await fetch("https://cymobility.go.yo.fr/apiTheo/connexion", {
+            const response = await fetch("https://cymobility.go.yo.fr/apiEya/connexion", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -28,8 +28,10 @@ export default function Login({ isVisible, showSignin }) {
 
             if (data.success) {
                 console.log('Connexion réussie');
+                showHome("accueil",true);
             } else {
                 console.log('Échec de la connexion');
+
             }
         } catch (error) {
             console.error('Erreur de connexion:', error);
@@ -73,7 +75,7 @@ export default function Login({ isVisible, showSignin }) {
                             <label><input type="checkbox" />Se rappeler de moi</label>
                             <a href="#">Mot de passe oublié?</a>
                         </div>
-                        <button type="submit">Connexion</button>
+                        <button type="submit" >Connexion</button>
                         <div className="register-link">
                             <p>Pas encore de compte? <a href="#" onClick={() => showSignin("inscription", true)}>S'inscrire</a></p>
                         </div>

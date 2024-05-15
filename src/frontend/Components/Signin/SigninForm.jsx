@@ -16,7 +16,7 @@ export default function Signin({ isVisible, showLogin }) {
         console.log("Fetching data with credentials:", credentials);
 
         try {
-            const response = await fetch("https://cymobility.go.yo.fr/apiTheo/inscription", {
+            const response = await fetch("https://cymobility.go.yo.fr/apiEya/inscription", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -88,7 +88,7 @@ export default function Signin({ isVisible, showLogin }) {
                         <div className="remember-forgot">
                             <label><input type="checkbox" />Se rappeler de moi</label>
                         </div>
-                        <button type="submit">Inscription</button>
+                        <button type="submit" onClick={() => showLogin("connexion", true)}>Inscription</button>
                         <div className="register-link">
                             <p>Déjà inscrit? <a href="#" onClick={() => showLogin("connexion", true)}>Se connecter</a></p>
                         </div>

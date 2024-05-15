@@ -13,6 +13,7 @@ import homeImage7 from '../../img/homeImage7.jpg'
 import World from '../../img/World.jpg'
 
 export default function Home({isVisible}) {
+
     const imagesList = [
         World,
         homeImage2,

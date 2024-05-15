@@ -22,7 +22,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.post('/apiTheo/connexion', async (req, res, next) => {
+app.post('/apiEya/connexion', async (req, res, next) => {
     let conn;
     const { login, password } = req.body;
     try {
@@ -41,7 +41,7 @@ app.post('/apiTheo/connexion', async (req, res, next) => {
     }
 });
 
-app.post('/apiTheo/inscription', async (req, res, next) => {
+app.post('/apiEya/inscription', async (req, res, next) => {
     let conn;
     const { nom1, nom2, mail, idEleve, password, date, niveauEtude } = req.body;
 

@@ -106,9 +106,9 @@ const Header = () => {
                 </nav>
             </header>
             <Presentation isVisible={presentationVisible}/>
-            <Home isVisible={accueilVisible}/>
+            <Home isVisible={accueilVisible} />
             <Contact isVisible={ContactVisible}/>
-            <Login isVisible={ConnexionVisible} showSignin={handleVisible}/>
+            <Login isVisible={ConnexionVisible} showSignin={handleVisible} showHome={handleVisible}/>
             <Signin isVisible={InscriptionVisible} showLogin={handleVisible}/>
             <Destination isVisible={destinationVisible}/>
             <Apropos isVisible={AproposVisible}/>
