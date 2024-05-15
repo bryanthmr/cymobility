@@ -1,7 +1,7 @@
 const express = require('express');
 
 const maria = require("mariadb")
-const cors = require('cors');
+
 const app = express();
 
 const pool = maria.createPool({
@@ -12,7 +12,7 @@ const pool = maria.createPool({
         database: 'myjuffzf_test', // à changer
         connectionLimit: 5
 });
-app.use(cors());
+
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
