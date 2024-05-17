@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+const argon2 = require('argon2');
 const maria = require('mariadb');
 
 const app = express();
@@ -13,32 +15,62 @@ const pool = maria.createPool({
     connectionLimit: 5,
 });
 
+// Configuration CORS
+const corsOptions = {
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+    credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
+app.options('*', cors(corsOptions)); // Gérer explicitement les requêtes pré-vol
+
+// Middleware pour inclure les en-têtes CORS dans toutes les réponses
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader(
-        'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
-    );
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
 
+// Routes
 app.post('/apiEya/connexion', async (req, res, next) => {
     let conn;
     const { login, password } = req.body;
+    console.log('Trying to connect to the database with login:', login);
     try {
         conn = await pool.getConnection();
-        const sql = 'SELECT * FROM Eleve WHERE id_eleve = ? AND mdp = ?';
-        const result = await conn.query(sql, [login, password]);
+        console.log('Connected to the database');
+        const sql = 'SELECT id_eleve, prenom, mdp FROM Eleve WHERE id_eleve = ?';
+        const result = await conn.query(sql, [login]);
+        console.log('Query executed, result:', result);
         if (result.length > 0) {
-            res.status(200).send({ success: true, message: 'Connexion réussie' });
+            const user = result[0];
+            console.log('User found:', user);
+
+            const passwordMatch = await argon2.verify(user.mdp, password);
+            console.log('Password match:', passwordMatch);
+
+            if (passwordMatch) {
+                console.log('User authenticated successfully');
+                let userId = user.id_eleve;
+                const userPrenom = user.prenom;
+
+                res.status(200).json({ success: true, message: 'Connexion réussie', user: { id: userId, name: userPrenom } });
+            } else {
+                console.log('Password does not match');
+                res.status(401).json({ success: false, message: 'Identifiants incorrects' });
+            }
         } else {
-            res.status(401).send({ success: false, message: 'Identifiants incorrects' });
+            console.log('User not found');
+            res.status(401).json({ success: false, message: 'Identifiants incorrects' });
         }
     } catch (error) {
-        res.status(500).send({ success: false, message: 'Erreur de connexion', error });
+        console.error('Database connection error:', error);
+        res.status(500).json({ success: false, message: 'Erreur de connexion', error: error.message });
     } finally {
         if (conn) conn.end();
     }
@@ -52,14 +84,28 @@ app.post('/apiEya/inscription', async (req, res, next) => {
 
     try {
         conn = await pool.getConnection();
-        const sql = 'INSERT INTO Eleve (nom, prenom, mail, id_eleve, mdp, date_naissance, id_etude) VALUES (?, ?, ?, ?, ?, ?, (SELECT id_etude FROM Etude WHERE niveau = ?))';
-        const result = await conn.query(sql, [nom1, nom2, mail, idEleve, password, date, niveauEtude]);
+        const hashedPassword = await argon2.hash(password);
+        console.log('Hashed password:', hashedPassword);
+
+        const sql = 'INSERT INTO Eleve (nom, prenom, mail, id_eleve, mdp, date, id_etude) VALUES (?, ?, ?, ?, ?, ?, (SELECT id_etude FROM Etude WHERE niveau = ?))';
+        const result = await conn.query(sql, [nom1, nom2, mail, idEleve, hashedPassword, date, niveauEtude]);
+        console.log('User registered:', result);
+
         res.status(200).send({ success: true, message: 'Inscription réussie' });
     } catch (error) {
         console.error('Database error:', error);
         res.status(500).send({ success: false, message: 'Erreur de connexion', error });
     } finally {
         if (conn) conn.end();
+    }
+});
+
+app.get('/apiEya/checkSession', (req, res) => {
+    const user = req.query.user;
+    if (user) {
+        res.status(200).send({ loggedIn: true, user: JSON.parse(user) });
+    } else {
+        res.status(401).send({ loggedIn: false });
     }
 });
 
@@ -83,6 +129,15 @@ app.use('/api/test', (req, res, next) => {
         },
     ];
     res.status(200).json(stuff);
+});
+
+// Middleware d'erreur
+app.use((err, req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+    res.status(err.status || 500);
+    res.json({ success: false, message: err.message });
 });
 
 module.exports = app;

@@ -71,6 +71,28 @@
 }
 
 .ContactInfo {
+    display: flex;
+    justify-content: center;
+}
+
+.ContactInfo h3#mail {
     text-align: center;
-    margin-right: 110px;
+    font-size: 25px;
+    margin-left: 12px;
+    padding-bottom: 50px;
+}
+
+.ContactInfo h3#ville {
+    margin-right: 20%;
+    font-size: 25px;
+
+}
+
+.ContactInfo h3#num{
+    margin-left: 20%;
+    font-size: 25px;
+}
+
+.contact h1#titre{
+    padding-top: 50px;
 }

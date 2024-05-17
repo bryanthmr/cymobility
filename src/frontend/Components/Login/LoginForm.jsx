@@ -1,15 +1,16 @@
 import React, { useState, useContext } from 'react';
 import './LoginForm.css';
 import { FaUser, FaLock } from 'react-icons/fa';
+import { AuthContext } from '../../../AuthContext'; // Importer le contexte d'authentification
 
 export default function Login({ isVisible, showSignin, showHome }) {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
+    const { setAuthState } = useContext(AuthContext); // Utiliser le contexte d'authentification
 
     const fetchData = async () => {
         const credentials = { login, password };
-        console.log('Fetching data with credentials:', credentials);
 
         try {
             const response = await fetch('https://cymobility.go.yo.fr/apiEya/connexion', {
@@ -25,13 +26,17 @@ export default function Login({ isVisible, showSignin, showHome }) {
             }
 
             const data = await response.json();
-            console.log('Response data:', data);
 
             if (data.success) {
-                console.log('Connexion réussie');
-                showHome('accueil', true); // Rediriger vers l'accueil après une connexion réussie
+                const user = data.user;
+                if (user && user.id && user.name) {
+                    localStorage.setItem('user', JSON.stringify(user)); // Stocker les informations de l'utilisateur dans localStorage
+                    setAuthState({ loggedIn: true, user }); // Mettre à jour le contexte d'authentification
+                    showHome('accueil', true); // Rediriger vers l'accueil après une connexion réussie
+                } else {
+                    setError(true);
+                }
             } else {
-                console.log('Échec de la connexion');
                 setError(true);
             }
         } catch (error) {
@@ -42,7 +47,6 @@ export default function Login({ isVisible, showSignin, showHome }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Form submitted with login:', login, 'password:', password);
         fetchData();
     };
 

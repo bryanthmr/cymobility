@@ -8,6 +8,7 @@ import Login from '../Login/LoginForm';
 import Signin from '../Signin/SigninForm';
 import Destination from '../Destination/Destination';
 import Apropos from '../Apropos/Apropos';
+import { AuthContext } from '../../../AuthContext'; // Importer le contexte d'authentification
 
 const Header = () => {
     // state
@@ -19,6 +20,8 @@ const Header = () => {
     const [AproposVisible, setAproposVisible] = useState(false);
     const [ConnexionVisible, setConnexionVisible] = useState(false);
     const [InscriptionVisible, setInscriptionVisible] = useState(false);
+
+    const { authState, setAuthState } = useContext(AuthContext); // Utiliser le contexte d'authentification
 
     // behavior
     const handleVisible = (elt, state) => {
@@ -81,6 +84,12 @@ const Header = () => {
         }
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem('user');
+        setAuthState({ loggedIn: false, user: null });
+        setActualComponent('accueil');
+    };
+
     // printing
     return (
         <>
@@ -95,13 +104,22 @@ const Header = () => {
                         <button onClick={() => handleVisible('apropos', true)}>À Propos</button>
                     </div>
                     <div className='connexion-button'>
-                        <button onClick={() => handleVisible('connexion', true)}>Me connecter</button>
-                        <button onClick={() => handleVisible('inscription', true)}>M'inscrire</button>
+                        {authState.loggedIn ? (
+                            <>
+                                <span>Bienvenue, {authState.user.name}</span>
+                                <button onClick={handleLogout}>Se déconnecter</button>
+                            </>
+                        ) : (
+                            <>
+                                <button onClick={() => handleVisible('connexion', true)}>Me connecter</button>
+                                <button onClick={() => handleVisible('inscription', true)}>M'inscrire</button>
+                            </>
+                        )}
                     </div>
                 </nav>
             </header>
             <Presentation isVisible={presentationVisible} />
-            <Home isVisible={accueilVisible} />
+            <Home isVisible={accueilVisible} showHome={handleVisible} />
             <Contact isVisible={ContactVisible} />
             <Login isVisible={ConnexionVisible} showSignin={handleVisible} showHome={handleVisible} />
             <Signin isVisible={InscriptionVisible} showLogin={handleVisible} />
@@ -109,12 +127,12 @@ const Header = () => {
             <Apropos isVisible={AproposVisible} />
 
             <div className='contact'>
-                <h1>Contact</h1>
-                <p className='ContactInfo'>
-                    <h3>Cergy, France</h3>
-                    <h3>info@mysite.com</h3>
-                    <h3>123-456-7890</h3>
-                </p>
+                <h1 id='titre'>Contact</h1>
+                <div className='ContactInfo'>
+                    <h3 id='ville'>Cergy, France</h3>
+                    <h3 id='mail'>info@mysite.com</h3>
+                    <h3 id='num'>123-456-7890</h3>
+                </div>
             </div>
         </>
     );
