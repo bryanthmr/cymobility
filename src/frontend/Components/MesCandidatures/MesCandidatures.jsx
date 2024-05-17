@@ -5,7 +5,7 @@ import {Button, Modal} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {format} from "date-fns";
 
-export default function MesCandidatures() {
+export default function MesCandidatures({isVisible}) {
     const [listeCandidatures, setListeCandidatures] = useState([]);
 
 
@@ -72,7 +72,7 @@ export default function MesCandidatures() {
 
     }
 
-    return (
+    return isVisible? (
         <div className='container'>
             <h1 className='title'>Mes Candidatures</h1>
             <br/>
@@ -122,5 +122,5 @@ export default function MesCandidatures() {
                 </Modal.Footer>
             </Modal>
         </div>
-    )
+    ):null;
 }

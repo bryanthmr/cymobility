@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 import './Offre.scss';
 
 
-export default function Offre(){
+export default function Offre({isVisible, afficherCandidatures}){
 
     const[offres, setOffres] = useState("");
     const[rajoutCandidature, setRajoutCandidature]= useState("");
@@ -126,6 +126,11 @@ export default function Offre(){
         }
     }, [rajoutCandidature, postulerClicked]);
 
+    const handleVoirCandidatures= () => {
+        console.log("dfgh");
+
+
+    }
 
 
 
@@ -139,7 +144,10 @@ export default function Offre(){
 
 
 
-    return (
+
+
+
+    return isVisible?(
         <>
             <div className='destination'>
                 <h1>Destination</h1>
@@ -204,7 +212,7 @@ export default function Offre(){
                         </Modal.Body>
 
                         <Modal.Footer>
-                            <Button onClick={postulerClicked ? () => handleCloseModal(): handlePostulerClick}>
+                            <Button onClick={postulerClicked ? () => handleVoirCandidatures(): handlePostulerClick}>
                                 {postulerClicked ?  "Voir mes candidatures" : "Postuler" }
                             </Button>
                         </Modal.Footer>
@@ -234,5 +242,5 @@ export default function Offre(){
 
         </>
 
-    )
+    ):null;
 }
