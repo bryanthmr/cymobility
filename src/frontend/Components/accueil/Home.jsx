@@ -3,7 +3,6 @@ import {Slide} from "react-slideshow-image";
 import './_home.scss';
 import 'react-slideshow-image/dist/styles.css';
 import {Card} from 'react-bootstrap';
-import homeImage1 from '../../img/homeImage1.jpg'
 import homeImage2 from '../../img/homeImage2.jpg'
 import homeImage3 from '../../img/homeImage3.jpg'
 import homeImage4 from '../../img/homeImage4.jpg'

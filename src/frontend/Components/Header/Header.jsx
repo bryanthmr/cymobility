@@ -9,6 +9,8 @@ import Login from "../Login/LoginForm";
 import Signin from "../Signin/SigninForm";
 import Destination from "../Destination/Destination"
 import Apropos from "../Apropos/Apropos";
+import MesCandidatures from "../MesCandidatures/MesCandidatures";
+import Offre from "../Destination/Offre";
 
 const Header = () => {
 
@@ -21,6 +23,7 @@ const Header = () => {
     const[AproposVisible,setAproposVisible]=useState(false);
     const[ConnexionVisible,setConnexionVisible]=useState(false);
     const[InscriptionVisible,setInscriptionVisible]=useState(false);
+    const[MesCandidaturesVisible,setMesCandidaturesVisible]=useState(false);
 
 
 
@@ -80,6 +83,15 @@ const Header = () => {
                     setActualComponent("inscription")
                 }
                 break;
+            //FIO
+            case "mescandidatures":
+                setMesCandidaturesVisible(state);
+                if(state===true) {
+                    handleVisible(actualComponent, false);
+                    setActualComponent("mescandidatures")
+                }
+                break;
+
             default:
                 console.log("error")
                 break;
@@ -121,9 +133,12 @@ const Header = () => {
                 <h4>info@mysite.com</h4>
                 <h4>123-456-7890</h4>
             </div>
+
+
         </>
     );
 
 };
 
 export default Header;
+
