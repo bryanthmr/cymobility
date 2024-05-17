@@ -12,7 +12,7 @@
         position: relative;
         margin: 2%;
 
-        button {
+        .button-spe {
 
             background-color: #292F36;
             border: none;
@@ -23,9 +23,18 @@
             width: 140px;
         }
 
-        button:hover{
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            border-radius: 15px
+        .button-spe:focus{
+            background: rgba(240, 245, 217, 0.5);
+            border: 2px solid #f0f5d9;
+            color: #292F36;
+            border-radius: 10px;
+        }
+
+        .button-spe:hover{
+            background: rgba(240, 245, 217, 0.5);
+            border: 2px solid #f0f5d9;
+            color: #292F36;
+            border-radius: 10px;
         }
 
 

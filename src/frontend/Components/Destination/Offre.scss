@@ -1,11 +1,14 @@
 
 .destination {
+  background-color: #f0f5d9;
   .cartes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(20%, 1fr)); /* Ajustez la largeur des cartes en fonction de vos besoins */
     grid-column-gap: 4%; /* Ajustez cet espace selon vos préférences */
     grid-row-gap: 4%;
     margin:2%;
+    border-radius: 50%;
+    z-index: 1;
 
   }
 
@@ -44,10 +47,9 @@
     background: transparent;
 
   }
-  .card-title{
 
-  }
   .card-text {
+    color:black;
 
   }
 
