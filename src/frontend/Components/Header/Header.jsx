@@ -8,6 +8,7 @@ import Login from '../Login/LoginForm';
 import Signin from '../Signin/SigninForm';
 import Destination from '../Destination/Destination';
 import Apropos from '../Apropos/Apropos';
+import MesCandidatures from '../MesCandidatures/MesCandidatures';
 import { AuthContext } from '../../../AuthContext'; // Importer le contexte d'authentification
 
 const Header = () => {
@@ -20,6 +21,7 @@ const Header = () => {
     const [AproposVisible, setAproposVisible] = useState(false);
     const [ConnexionVisible, setConnexionVisible] = useState(false);
     const [InscriptionVisible, setInscriptionVisible] = useState(false);
+    const [mesCandidaturesVisible, setMesCandidaturesVisible] = useState(false);
 
     const { authState, setAuthState } = useContext(AuthContext); // Utiliser le contexte d'authentification
 
@@ -78,6 +80,13 @@ const Header = () => {
                     setActualComponent('inscription');
                 }
                 break;
+            case 'mesCandidatures':
+                setMesCandidaturesVisible(state);
+                if (state === true) {
+                    handleVisible(actualComponent, false);
+                    setActualComponent('mesCandidatures');
+                }
+                break;
             default:
                 console.log('error');
                 break;
@@ -107,6 +116,7 @@ const Header = () => {
                         {authState.loggedIn ? (
                             <>
                                 <span>Bienvenue, {authState.user.name}</span>
+                                <button onClick={() => handleVisible('mesCandidatures', true)}>Mes candidatures</button>
                                 <button onClick={handleLogout}>Se déconnecter</button>
                             </>
                         ) : (
@@ -125,9 +135,12 @@ const Header = () => {
             <Signin isVisible={InscriptionVisible} showLogin={handleVisible} />
             <Destination isVisible={destinationVisible} />
             <Apropos isVisible={AproposVisible} />
+            <MesCandidatures isVisible={mesCandidaturesVisible} />
 
             <div className='contact'>
-                <h1 id='titre'>Contact</h1>
+                <div id='divTitre'>
+                    <h1 id='titre'>Contact</h1>
+                </div>
                 <div className='ContactInfo'>
                     <h3 id='ville'>Cergy, France</h3>
                     <h3 id='mail'>info@mysite.com</h3>

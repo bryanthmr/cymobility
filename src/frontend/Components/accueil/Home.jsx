@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Slide} from "react-slideshow-image";
 import './_home.scss';
 import 'react-slideshow-image/dist/styles.css';
@@ -11,8 +11,12 @@ import homeImage5 from '../../img/homeImage5.jpg'
 import homeImage6 from '../../img/homeImage6.jpg'
 import homeImage7 from '../../img/homeImage7.jpg'
 import World from '../../img/World.jpg'
+import { AuthContext } from '../../../AuthContext'; // Importer le contexte d'authentification
 
 export default function Home({isVisible}) {
+
+    const { authState, setAuthState } = useContext(AuthContext); // Utiliser le contexte d'authentification
+
     const imagesList = [
         World,
         homeImage2,
@@ -27,8 +31,16 @@ export default function Home({isVisible}) {
     return isVisible?(
         <div className='home'>
 
+            {authState.loggedIn ? (
+                <>
+                    <div>
+                        <h3>Bienvenue, {authState.user.name}</h3>
+                    </div>
+                </>
+            ) : (<></>) }
+
             <div className='titre'>
-                <span>Planifier votre mobilité international avec CyMobility</span>
+               <span>Planifier votre mobilité international avec CyMobility</span>
             </div>
 
             <div className="images">

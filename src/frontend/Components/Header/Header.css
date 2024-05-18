@@ -85,7 +85,10 @@
 .ContactInfo h3#ville {
     margin-right: 20%;
     font-size: 25px;
+}
 
+div#divTitre {
+    padding-bottom: 30px;
 }
 
 .ContactInfo h3#num{
@@ -93,6 +96,3 @@
     font-size: 25px;
 }
 
-.contact h1#titre{
-    padding-top: 50px;
-}

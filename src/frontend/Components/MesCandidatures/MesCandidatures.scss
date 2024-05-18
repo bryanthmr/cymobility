@@ -1,0 +1,33 @@
+.container {
+  padding: 20px;
+  font-family: Arial sans-serif;
+  background: #f0f5d9;
+
+  .title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #292F36;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th{
+    border: 1px solid #ddd;
+    padding: 8px;
+    background-color: #292F36;
+    color:#f0f5d9;
+  }
+  tr{
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  td{
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  tr:hover {
+    background-color: rgba(190, 197,179,0.78);
+  }
+
+}
