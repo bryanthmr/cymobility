@@ -1,5 +1,5 @@
 import './Apropos.css';
-import logo2 from './travel-Photoroom.png';
+
 import React from "react";
 
 export default function Apropos({isVisible}) {
@@ -35,7 +35,7 @@ export default function Apropos({isVisible}) {
                             et intellectuelle est essentielle à l'éducation et à la croissance personnelle.</p>
                         <br/>
                         <br/>
-                        <img src={logo2} alt="Logo" width="90px" height="90px" className="logo2"/>
+                        <img src="" alt="Logo" width="90px" height="90px" className="logo2"/>
 
                     </div>
                 </section>

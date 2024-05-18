@@ -14,6 +14,7 @@ const pool = maria.createPool({
 });
 
 app.use(bodyParser.json());
+app.use(express.json());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -32,8 +33,8 @@ app.post('/apiEya/connexion', async (req, res, next) => {
     try {
         conn = await pool.getConnection();
         console.log('Connected to the database');
-        const sql = 'SELECT id_eleve, prenom FROM Eleve WHERE id_eleve = ? AND mdp = ?';
-        const result = await conn.query(sql, [login, password]);
+
+        const result = await conn.query('SELECT id_eleve, prenom FROM Eleve WHERE id_eleve = ? AND mdp = ?', [login, password]);
         console.log('Query executed, result:', result);
         if (result.length > 0) {
             const user = result[0];
@@ -58,14 +59,14 @@ app.post('/apiEya/connexion', async (req, res, next) => {
 
 app.post('/apiEya/inscription', async (req, res, next) => {
     let conn;
-    const { nom1, nom2, mail, idEleve, password, date, niveauEtude } = req.body;
 
-    console.log('Received inscription data:', { nom1, nom2, mail, idEleve, password, date, niveauEtude });
+
+    //console.log('Received inscription data:', { nom1, nom2, mail, idEleve, password, date, niveauEtude });
 
     try {
+        const { nom1, nom2, mail, idEleve, password, date, niveauEtude } = req.body;
         conn = await pool.getConnection();
-        const sql = 'INSERT INTO Eleve (nom, prenom, mail, id_eleve, mdp, date_naissance, id_etude) VALUES (?, ?, ?, ?, ?, ?, (SELECT id_etude FROM Etude WHERE niveau = ?))';
-        const result = await conn.query(sql, [nom1, nom2, mail, idEleve, password, date, niveauEtude]);
+        const result = await conn.query('INSERT INTO Eleve (nom, prenom, mail, id_eleve, mdp, date, id_etude) VALUES (?, ?, ?, ?, ?, ?, (SELECT id_etude FROM Etude WHERE niveau = ?))', [nom1, nom2, mail, idEleve, password, date, niveauEtude]);
         res.status(200).send({ success: true, message: 'Inscription réussie' });
     } catch (error) {
         console.error('Database error:', error);
