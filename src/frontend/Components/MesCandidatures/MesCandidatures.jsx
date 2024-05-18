@@ -19,6 +19,8 @@ export default function MesCandidatures({isVisible}) {
         }
     }
 
+
+
     useEffect(() => {
         fetchData();
     }, []);
