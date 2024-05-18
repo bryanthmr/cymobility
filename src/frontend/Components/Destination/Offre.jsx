@@ -1,14 +1,16 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {Button, Card, Modal} from "react-bootstrap";
 import MesCandidatures from "../MesCandidatures/MesCandidatures";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { format } from 'date-fns';
 import './Offre.scss';
+import {AuthContext} from "../../../AuthContext";
 
 
 export default function Offre({isVisible,afficherCandidatures,choixDest,choixSpe}){
 
-    const [offres, setOffres] = useState([{}]);
+    const { authState, setAuthState } = useContext(AuthContext);
+    const [offres, setOffres] = useState([]);
     const[rajoutCandidature, setRajoutCandidature]= useState("");
 
 
@@ -33,7 +35,7 @@ export default function Offre({isVisible,afficherCandidatures,choixDest,choixSpe
         }, [choixDest,choixSpe]);
 
     const [showModal, setShowModal] = useState(false);
-    const [selectedOffre, setSelectedOffre] = useState(null);
+    const [selectedOffre, setSelectedOffre] = useState("");
     const [postulerClicked, setPostulerClicked] = useState(false);
 
 
@@ -46,6 +48,7 @@ export default function Offre({isVisible,afficherCandidatures,choixDest,choixSpe
     const handleCloseModal = () => {
         setShowModal(false);
         setSelectedOffre();
+
         setPostulerClicked(false);
     };
 
@@ -66,54 +69,93 @@ export default function Offre({isVisible,afficherCandidatures,choixDest,choixSpe
             id_offre: selectedOffre.id_offre,
             statut : 'Transmis'
         };
+        // Envoi de la nouvelle adresse à la route POST
+        await fetch("https://cymobility.go.yo.fr/apiFio/addCandidature", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newCandidature),
+        })
+            .then( async response => {
+                if (!response.ok) {
+                    throw new Error('Erreur lors de l\'ajout de candi2');
+                }
+                const result = await response.json();
+                setCandidatureAvant(result[0]);
+                setCandidatureApres(result[1]);
 
-        useEffect(() => {
-            if (postulerClicked) {
-                console.log('rajout = ', rajoutCandidature);
-            }
-        }, [rajoutCandidature, postulerClicked]);
-
-        const handleVoirCandidatures= () => {
-            console.log("dfgh");
 
 
+
+            })
+            .catch(error => {
+                console.error('Erreur lors de l\'ajout de candi :', error);
+            });
+
+
+        setPostulerClicked(true); // Met à jour l'état pour indiquer que le bouton "Postuler" a été cliqué
+    };
+
+    useEffect(() => {
+        if (postulerClicked) {
+            setRajoutCandidature(CandidatureAvant.length !== CandidatureApres.length);
         }
+    }, [CandidatureAvant, CandidatureApres, postulerClicked]);
+
+
+
+
+
+    useEffect(() => {
+        if (postulerClicked) {
+            console.log('rajout = ', rajoutCandidature);
+        }
+    }, [rajoutCandidature, postulerClicked]);
+
+    const handleVoirCandidatures= () => {
+        console.log("dfgh");
+
+
+    }
+
+    useEffect(()=>{
+        console.log(selectedOffre);
+
+    },[selectedOffre]);
 
 
     return isVisible?(
         <>
             <div className='destination'>
-                <h1 style={{color:"black"}}>Destination</h1>
-                <button onClick={addAddress}>Ajouter une adresse</button>
-                <div>
-                    <h2>Études</h2>
 
-                    <div className="cartes">
+                <div className="cartes">
 
-                        {offres && offres.map((offre, index) => (
+                    {offres && offres.map((offre, index) => (
 
 
-                            <Card index={index}>
-                                <Card.Header>{offre.nom}</Card.Header>
+                        <Card onClick={() => handleCardClick(offre)}>
+                            <Card.Header>{offre.nom}</Card.Header>
 
-                                <Card.Body>
-                                    <Card.Title>{offre.titre}</Card.Title>
+                            <Card.Body>
+                                <Card.Title>{offre.titre}</Card.Title>
 
-                                    <Card.Text>
-                                        <strong> Ville : </strong>{offre.ville}<br/>
-                                        <strong> Niveau : </strong>{offre.niveau}<br/>
-                                        <strong> Durée : </strong>{offre.duree} mois
-                                    </Card.Text>
+                                <Card.Text>
+                                    <strong> Ville : </strong>{offre.ville}<br/>
+                                    <strong> Niveau : </strong>{offre.niveau}<br/>
+                                    <strong> Durée : </strong>{offre.duree} mois
+                                </Card.Text>
 
-                                </Card.Body>
-                            </Card>
+                            </Card.Body>
+                        </Card>
 
-                        ))}
-                    </div>
+                    ))}
+                </div>
                 <div>
                     <Modal show={showModal} onHide={handleCloseModal} size="md">
                         <Modal.Header closeButton>
                             <Modal.Title>{selectedOffre && selectedOffre.titre}</Modal.Title>
+
                         </Modal.Header>
                         <Modal.Body>
                             {postulerClicked ? (
@@ -153,24 +195,12 @@ export default function Offre({isVisible,afficherCandidatures,choixDest,choixSpe
                     </Modal>
                 </div>
 
-                <div>
-                    <p>ASUPPRIMER</p>
-                    <p>ASUPPRIMER</p>
-                    <p>ASUPPRIMER</p>
-                    <p>ASUPPRIMER</p>
-                    <p>ASUPPRIMER</p>
-                    <p>ASUPPRIMER</p>
-                    <p>ASUPPRIMER</p>
-
-
-
-                </div>
-
-
-
 
 
             </div>
+
+
+
         </>
 
     ):null;
