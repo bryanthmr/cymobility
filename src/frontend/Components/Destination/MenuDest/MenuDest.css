@@ -1,0 +1,30 @@
+#MenuDest-body{
+    background: #292F36;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 2px solid #f0f5d9;
+    padding: 5%;
+    font-size: 50px;
+
+}
+
+.MenuDest-bouton-bg{
+    background-color: #292F36;
+    border: none;
+    font-size: medium;
+    font-family: "Linotype Didot";
+    color: white;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
+    width: 140px;
+
+
+}
+
+.MenuDest-bouton-bg:hover{
+    background: rgba(240, 245, 217, 0.5);
+    border: 2px solid #f0f5d9;
+    color: #292F36;
+    border-radius: 10px;
+}
+
+
