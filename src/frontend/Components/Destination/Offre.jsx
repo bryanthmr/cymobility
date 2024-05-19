@@ -126,6 +126,10 @@ export default function Offre({isVisible, showCandidature,choixDest,choixSpe}){
 
     }
 
+    const handleSeConnecter= () =>{
+        showCandidature("connexion", true);
+    }
+
     useEffect(()=>{
         console.log(selectedOffre);
 
@@ -180,7 +184,7 @@ export default function Offre({isVisible, showCandidature,choixDest,choixSpe}){
 
                                 ) : (
                                     <div>
-                                        <p>Veuillez vous connecter avant de postuler à une offre </p>
+                                        <p>Veuillez vous connecter avant de postuler à une offre. </p>
                                     </div>
 
                                 )
@@ -203,8 +207,25 @@ export default function Offre({isVisible, showCandidature,choixDest,choixSpe}){
                         </Modal.Body>
 
                         <Modal.Footer>
-                            <Button onClick={postulerClicked ? () => handleVoirCandidatures(): handlePostulerClick}>
-                                {postulerClicked ?  "Voir mes candidatures" : "Postuler" }
+                            <Button onClick={() => {
+                                if (postulerClicked) {
+                                    if (authState.loggedIn) {
+                                        handleVoirCandidatures();
+                                    } else {
+                                        handleSeConnecter();
+                                    }
+                                } else {
+                                    handlePostulerClick();
+                                }
+                            }}>
+                                {postulerClicked ?(
+                                    authState.loggedIn?(
+                                        "Voir mes candidatures"
+                                    ): (
+                                        "Se connecter"
+                                    )
+                                ):(
+                                        "Postuler") }
                             </Button>
                         </Modal.Footer>
                     </Modal>
