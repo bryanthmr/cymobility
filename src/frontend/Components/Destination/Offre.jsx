@@ -58,40 +58,48 @@ export default function Offre({isVisible,afficherCandidatures,choixDest,choixSpe
 
 
 
+
     const handlePostulerClick = async () => {
 
         // Création d'une nouvelle adresse
         console.log(selectedOffre);
 
-
-        const newCandidature = {
-            id_eleve: "2", //FIO
-            id_offre: selectedOffre.id_offre,
-            statut : 'Transmis'
-        };
-        // Envoi de la nouvelle adresse à la route POST
-        await fetch("https://cymobility.go.yo.fr/apiFio/addCandidature", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newCandidature),
-        })
-            .then( async response => {
-                if (!response.ok) {
-                    throw new Error('Erreur lors de l\'ajout de candi2');
-                }
-                const result = await response.json();
-                setCandidatureAvant(result[0]);
-                setCandidatureApres(result[1]);
-
-
-
-
+        if(authState.loggedIn){
+            const newCandidature = {
+                id_eleve: authState.user.id, //FIO
+                id_offre: selectedOffre.id_offre,
+                statut : 'Transmis'
+            };
+            // Envoi de la nouvelle adresse à la route POST
+            await fetch("https://cymobility.go.yo.fr/apiFio/addCandidature", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newCandidature),
             })
-            .catch(error => {
-                console.error('Erreur lors de l\'ajout de candi :', error);
-            });
+                .then( async response => {
+                    if (!response.ok) {
+                        throw new Error('Erreur lors de l\'ajout de candi2');
+                    }
+                    const result = await response.json();
+                    setCandidatureAvant(result[0]);
+                    setCandidatureApres(result[1]);
+
+
+
+
+                })
+                .catch(error => {
+                    console.error('Erreur lors de l\'ajout de candi :', error);
+                });
+
+        }else{
+            console.log("pas connecté");
+        }
+
+
+
 
 
         setPostulerClicked(true); // Met à jour l'état pour indiquer que le bouton "Postuler" a été cliqué
@@ -159,15 +167,23 @@ export default function Offre({isVisible,afficherCandidatures,choixDest,choixSpe
                         </Modal.Header>
                         <Modal.Body>
                             {postulerClicked ? (
-                                rajoutCandidature ? (
-                                    <div>
-                                        <p>Nous vous remercions pour votre intérêt.☺</p>
-                                        <p>L'offre a été ajoutée à vos candidatures. Pour y accéder, veuillez cliquer sur le bouton "Mes
-                                            candidatures" ci-dessous ou en haut de la page. Toutes les informations nécessaires à votre candidature
-                                            ont été récupérées grâce à votre numéro étudiant.</p>
-                                    </div>
+                                authState.loggedIn ?(
+                                    rajoutCandidature ? (
+                                        <div>
+                                            <p>Nous vous remercions pour votre intérêt.☺</p>
+                                            <p>L'offre a été ajoutée à vos candidatures. Pour y accéder, veuillez cliquer sur le bouton "Mes
+                                                candidatures" ci-dessous ou en haut de la page. Toutes les informations nécessaires à votre candidature
+                                                ont été récupérées grâce à votre numéro étudiant.</p>
+                                        </div>
+                                    ) : (
+                                        <p>Vous avez déja candidaté à cette offre.</p>
+                                    )
+
                                 ) : (
-                                    <p>Vous avez déja candidaté à cette offre.</p>
+                                    <div>
+                                        <p>Veuillez vous connecter avant de postuler à une offre </p>
+                                    </div>
+
                                 )
                             ) : (
                                 selectedOffre && (

@@ -1,3 +1,5 @@
+
+
 const express = require('express');
 const maria = require('mariadb');
 
@@ -237,14 +239,24 @@ app.post("/apiBryan/addCandidature", async (req, res, next) => {
 });
 
 
-app.get('/apiBryan/mesCandidatures', async  (req,res,next) => {
+app.post('/apiBryan/mesCandidatures', async  (req,res,next) => {
     let conn;
 
 
+
     try{
-        const idEtudiant = 2;
+        const { id_eleve } = req.body;
+
         conn=await pool.getConnection();
-        const result  = await conn.query('SELECT * FROM Postuler WHERE id_eleve = ?;',idEtudiant)
+        const result = await conn.query('SELECT p.id_eleve, o.id_offre, o.titre,o.description, o.mission, o.duree, o.date_priseDP,o.salaire, o.profil_recherche, e.nom,ad.ville,ap.type,et.niveau, p.statut\n' +
+            '            FROM Postuler p\n' +
+            '            JOIN Offre o ON p.id_offre = o.id_offre\n' +
+            '            JOIN Entreprise e ON o.id_entreprise = e.id_entreprise\n' +
+            '            JOIN Adresse ad ON o.ID_adresse_offre = ad.id_adress\n' +
+            '            JOIN Appartement ap ON o.ID_appartement = ap.id_appart\n' +
+            '            JOIN Etude et ON o.id_etude = et.id_etude\n' +
+            '            WHERE p.id_eleve = ?\n' +
+            '           ORDER BY p.id_offre;', id_eleve);
 
 
         res.status(200).send(result)

@@ -1,27 +1,74 @@
 // MesCandidatures.js
 import './MesCandidatures.scss';
-import { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Button, Modal} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {format} from "date-fns";
+import {AuthContext} from "../../../AuthContext";
 
 export default function MesCandidatures({isVisible}) {
     const [listeCandidatures, setListeCandidatures] = useState([]);
+    const { authState, setAuthState } = useContext(AuthContext);
 
 
+
+    useEffect(() => {
         const fetchData = async () => {
-            try {
-                const response = await fetch("https://cymobility.go.yo.fr/apiBryan/mesCandidatures");
-                const result = await response.json();
+
+                /*
+                const IdEleve = authState.user.id;
+                const response = await fetch("https://cymobility.go.yo.fr/apiBryan/mesCandidatures", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(IdEleve),
+                })
+
+                //const response = await fetch("https://cymobility.go.yo.fr/apiBryan/mesCandidatures");
+               const result = await response.json();
                 setListeCandidatures(result);
-            } catch (error) {
-                console.log(error);
-            }
+
+                 */
+
+
+
+
+                    const id_eleve = {
+                        id_eleve: '2',
+                    };
+
+
+
+
+                // Envoi de la nouvelle adresse à la route POST
+                await fetch("https://cymobility.go.yo.fr/apiBryan/mesCandidatures", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(id_eleve),
+                })
+                    .then( async response => {
+                        if (!response.ok) {
+                            throw new Error('Erreur lors  de la recup des candidatures  ');
+                        }
+                        const result = await response.json();
+                        setListeCandidatures(result);
+
+
+
+
+                    })
+                    .catch(error => {
+                        console.error('Erreur lors de la recup des candi :', error);
+                    });
+
         }
 
-        useEffect(() => {
+
         fetchData().then();
-        }, []);
+    }, []);
 
     const [showModal, setShowModal] = useState(false);
     const [selectedCandidature, setSelectedCandidature] = useState(null);
@@ -60,7 +107,7 @@ export default function MesCandidatures({isVisible}) {
                     if (!response.ok) {
                         throw new Error('Erreur lors de la suppression de candi2');
                     }
-                    await fetchData();
+                    //await fetchData();
                     handleCloseModal();
                 })
                 .catch(error => {
