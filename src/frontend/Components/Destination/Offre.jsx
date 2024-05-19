@@ -1,13 +1,12 @@
 import {useContext, useEffect, useState} from "react";
 import {Button, Card, Modal} from "react-bootstrap";
-import MesCandidatures from "../MesCandidatures/MesCandidatures";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { format } from 'date-fns';
 import './Offre.scss';
 import {AuthContext} from "../../../AuthContext";
 
 
-export default function Offre({isVisible,afficherCandidatures,choixDest,choixSpe}){
+export default function Offre({isVisible, showCandidature,choixDest,choixSpe}){
 
     const { authState, setAuthState } = useContext(AuthContext);
     const [offres, setOffres] = useState([]);
@@ -122,7 +121,7 @@ export default function Offre({isVisible,afficherCandidatures,choixDest,choixSpe
     }, [rajoutCandidature, postulerClicked]);
 
     const handleVoirCandidatures= () => {
-        console.log("dfgh");
+        showCandidature("mesCandidatures", true);
 
 
     }

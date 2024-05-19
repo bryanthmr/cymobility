@@ -133,7 +133,7 @@ const Header = () => {
             <Contact isVisible={ContactVisible} />
             <Login isVisible={ConnexionVisible} showSignin={handleVisible} showHome={handleVisible} />
             <Signin isVisible={InscriptionVisible} showLogin={handleVisible} />
-            <Destination isVisible={destinationVisible} />
+            <Destination isVisible={destinationVisible} showCandidature={handleVisible} />
             <Apropos isVisible={AproposVisible} />
             <MesCandidatures isVisible={mesCandidaturesVisible} />
 
