@@ -12,7 +12,7 @@ const pool = maria.createPool({
   user: 'myjuffzf_userTest', // à changer
   password: 'L#NO5!NTlOO2@uT,Z5', // à changer
   port:'3306',
-  database: 'myjuffzf_test', // à changer
+  database: 'myjuffzf_Cymobility', // à changer
   connectionLimit: 5
 });
 
@@ -114,34 +114,34 @@ app.post("/apiFio/addCandidature", async (req, res, next) => {
 });
 
 
-app.get('/apiFio/mesCandidatures', async  (req,res,next) => {
+app.get('/apiFio/mesCandidatures', async (req, res, next) => {
     let conn;
     const idEtudiant = 2;
 
-    try{
-        conn=await pool.getConnection();
+    try {
+        conn = await pool.getConnection();
 
-        const result=await pool.query('SELECT p.id_eleve, o.id_offre, o.titre,o.description, o.mission, o.duree, o.date_priseDP,o.salaire, o.profil_recherche, e.nom,ad.ville,ap.type,et.niveau, p.statut\n' +
-            'FROM Postuler p\n' +
-            'JOIN Offre o ON p.id_offre = o.id_offre\n' +
-            'JOIN Entreprise e ON o.id_entreprise = e.id_entreprise\n' +
-            'JOIN Adresse ad ON o.ID_adresse_offre = ad.id_adress\n' +
-            'JOIN Appartement ap ON o.ID_appartement = ap.id_appart\n' +
-            'JOIN Etude et ON o.id_etude = et.id_etude\n' +
-            'WHERE p.id_eleve = ?\n' +
-            'ORDER BY p.id_offre;', idEtudiant);
+        // Pour des tests, essayons une requête simple d'abord
+        const result = await conn.query('SELECT p.id_eleve, o.id_offre, o.titre,o.description, o.mission, o.duree, o.date_priseDP,o.salaire, o.profil_recherche, e.nom,ad.ville,ap.type,et.niveau, p.statut\n' +
+            '            FROM Postuler p\n' +
+            '            JOIN Offre o ON p.id_offre = o.id_offre\n' +
+            '            JOIN Entreprise e ON o.id_entreprise = e.id_entreprise\n' +
+            '            JOIN Adresse ad ON o.ID_adresse_offre = ad.id_adress\n' +
+            '            JOIN Appartement ap ON o.ID_appartement = ap.id_appart\n' +
+            '            JOIN Etude et ON o.id_etude = et.id_etude\n' +
+            '            WHERE p.id_eleve = 2\n' +
+            '           ORDER BY p.id_offre;');
 
-
-        res.status(200).send(result)
-    }
-    catch(error){
-        res.status(404).send("Erreur la récupération des candidatures n'a pas été effectué.")
-    }
-    finally {
+        res.status(200).send(result);
+    } catch (error) {
+        console.error("Erreur lors de la récupération des candidatures :", error.message);
+        console.error("Stack trace :", error.stack);
+        res.status(500).send(error.message);
+    } finally {
         if (conn) conn.end(); // libère la connexion
     }
-
 });
+
 
 app.post("/apiFio/removeCandidature", async (req, res, next) => {
     let conn;
