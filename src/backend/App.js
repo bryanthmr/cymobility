@@ -1,6 +1,6 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const maria = require('mariadb');
+
 
 const app = express();
 
@@ -13,8 +13,9 @@ const pool = maria.createPool({
     connectionLimit: 5,
 });
 
-app.use(bodyParser.json());
+
 app.use(express.json());
+
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -23,7 +24,30 @@ app.use((req, res, next) => {
     next();
 });
 
-app.post('/apiEya/connexion', async (req, res, next) => {
+
+
+
+
+
+app.get('/apiBryan/spe', async  (req,res,next) => {
+    let conn;
+    try{
+        conn=await pool.getConnection();
+        const result=await conn.query("SELECT DISTINCT et.specialite FROM Etude et")// rajouter [pays_choisi, specialite_choisi] apres la virgule
+
+
+        res.status(200).send(result)
+    }
+    catch(error){
+        res.status(404).send("Connexion ratée")
+    }
+    finally {
+        if (conn) await conn.end(); // libère la connexion
+    }
+
+});
+
+app.post('/apiBryan/connexion', async (req, res, next) => {
     let conn;
     const { login, password } = req.body;
     console.log('Trying to connect to the database with login:', login);
@@ -49,12 +73,12 @@ app.post('/apiEya/connexion', async (req, res, next) => {
         console.error('Database connection error:', error);
         res.status(500).json({ success: false, message: 'Erreur de connexion', error: error.message });
     } finally {
-        if (conn) conn.end();
+        if (conn) await conn.end();
     }
 });
 
 
-app.post('/apiEya/inscription', async (req, res, next) => {
+app.post('/apiBryan/inscription', async (req, res, next) => {
     let conn;
 
 
@@ -69,11 +93,11 @@ app.post('/apiEya/inscription', async (req, res, next) => {
         console.error('Database error:', error);
         res.status(500).send({ success: false, message: 'Erreur de connexion', error });
     } finally {
-        if (conn) conn.end();
+        if (conn) await conn.end();
     }
 });
 
-app.get('/apiEya/checkSession', (req, res) => {
+app.get('/apiBryan/checkSession', (req, res) => {
     const user = req.query.user;
     if (user) {
         res.status(200).send({ loggedIn: true, user: JSON.parse(user) });
@@ -86,7 +110,7 @@ app.get('/apiBryan/menuDest', async  (req,res,next) => {
     let conn;
     try{
         conn=await pool.getConnection();
-        const result=await pool.query('SELECT DISTINCT pays FROM Adresse ')
+        const result=await conn.query('SELECT DISTINCT pays FROM Adresse ')
         res.status(200).send(result)
     }
     catch(error){
@@ -121,7 +145,7 @@ app.post('/apiBryan/data', async  (req,res,next) => {
         conn=await pool.getConnection();
 
         if(choixDest==="" && choixSpe==="") {
-            const result = await pool.query('SELECT of.id_offre, of.titre, of.description, of.mission, of.duree, of.date_priseDP, of.salaire, of.profil_recherche, en.nom, ad.ville, ap.type, et.niveau\n' +
+            const result = await conn.query('SELECT of.id_offre, of.titre, of.description, of.mission, of.duree, of.date_priseDP, of.salaire, of.profil_recherche, en.nom, ad.ville, ap.type, et.niveau\n' +
                 'FROM  Offre of,  Adresse ad ,  Entreprise en ,  Appartement ap ,  Etude et \n' +
                 'where of.id_entreprise = en.id_entreprise\n' +
                 'and of.ID_adresse_offre = ad.id_adress\n' +
@@ -130,7 +154,7 @@ app.post('/apiBryan/data', async  (req,res,next) => {
             res.status(200).send(result)
         }
         else if(choixDest==="" && choixSpe!==""){
-            const  result = await pool.query('SELECT of.id_offre, of.titre, of.description, of.mission, of.duree, of.date_priseDP, of.salaire, of.profil_recherche, en.nom, ad.ville, ap.type, et.niveau\n' +
+            const  result = await conn.query('SELECT of.id_offre, of.titre, of.description, of.mission, of.duree, of.date_priseDP, of.salaire, of.profil_recherche, en.nom, ad.ville, ap.type, et.niveau\n' +
                 'FROM  Offre of,  Adresse ad ,  Entreprise en ,  Appartement ap ,  Etude et \n' +
                 'where of.id_entreprise = en.id_entreprise\n' +
                 'and of.ID_adresse_offre = ad.id_adress\n' +
@@ -140,7 +164,7 @@ app.post('/apiBryan/data', async  (req,res,next) => {
             res.status(200).send(result)
         }
         else if(choixDest!=="" && choixSpe===""){
-            const result = await pool.query('SELECT of.id_offre, of.titre, of.description, of.mission, of.duree, of.date_priseDP, of.salaire, of.profil_recherche, en.nom, ad.ville, ap.type, et.niveau\n' +
+            const result = await conn.query('SELECT of.id_offre, of.titre, of.description, of.mission, of.duree, of.date_priseDP, of.salaire, of.profil_recherche, en.nom, ad.ville, ap.type, et.niveau\n' +
                 'FROM  Offre of,  Adresse ad ,  Entreprise en ,  Appartement ap ,  Etude et \n' +
                 'where of.id_entreprise = en.id_entreprise\n' +
                 'and of.ID_adresse_offre = ad.id_adress\n' +
@@ -150,7 +174,7 @@ app.post('/apiBryan/data', async  (req,res,next) => {
             res.status(200).send(result)
         }
         else{
-            const result = await pool.query('SELECT of.id_offre, of.titre, of.description, of.mission, of.duree, of.date_priseDP, of.salaire, of.profil_recherche, en.nom, ad.ville, ap.type, et.niveau\n' +
+            const result = await conn.query('SELECT of.id_offre, of.titre, of.description, of.mission, of.duree, of.date_priseDP, of.salaire, of.profil_recherche, en.nom, ad.ville, ap.type, et.niveau\n' +
                 'FROM  Offre of,  Adresse ad ,  Entreprise en ,  Appartement ap ,  Etude et \n' +
                 'where of.id_entreprise = en.id_entreprise\n' +
                 'and of.ID_adresse_offre = ad.id_adress\n' +
@@ -165,7 +189,7 @@ app.post('/apiBryan/data', async  (req,res,next) => {
 
     }
     catch(error){
-        res.status(404).send("Connexion ratée")
+        res.status(500).send("Connexion ratée")
     }
     finally {
         if (conn) await conn.end(); // libère la connexion
@@ -176,7 +200,7 @@ app.post('/apiBryan/data', async  (req,res,next) => {
 
 
 
-app.post("/apiFio/addCandidature", async (req, res, next) => {
+app.post("/apiBryan/addCandidature", async (req, res, next) => {
     let conn;
 
     try {
@@ -184,13 +208,13 @@ app.post("/apiFio/addCandidature", async (req, res, next) => {
         const { id_eleve, id_offre, statut } = req.body;
 
         conn = await pool.getConnection();
-        const Avant = await pool.query('SELECT * FROM Postuler')
+        const Avant = await conn.query('SELECT * FROM Postuler')
         const response=await conn.query('INSERT INTO Postuler (id_eleve, id_offre, statut)\n' +
             'SELECT ?, ?, ?\n' +
             'WHERE NOT EXISTS (\n' +
             '    SELECT 1 FROM Postuler WHERE id_eleve = ? AND id_offre = ?\n' +
             ');\n', [id_eleve, id_offre, statut, id_eleve, id_offre]);
-        const Apres = await pool.query('SELECT * FROM Postuler');
+        const Apres = await conn.query('SELECT * FROM Postuler');
         const donnee = [];
         donnee[0] = Avant
         donnee[1] = Apres
@@ -203,7 +227,7 @@ app.post("/apiFio/addCandidature", async (req, res, next) => {
 
 
     } finally {
-        if (conn) conn.end();
+        if (conn) await conn.end();
 
 
     }
@@ -213,36 +237,28 @@ app.post("/apiFio/addCandidature", async (req, res, next) => {
 });
 
 
-app.get('/apiFio/mesCandidatures', async  (req,res,next) => {
+app.get('/apiBryan/mesCandidatures', async  (req,res,next) => {
     let conn;
-    const idEtudiant = 2;
+
 
     try{
+        const idEtudiant = 2;
         conn=await pool.getConnection();
-
-        const result=await pool.query('SELECT p.id_eleve, o.id_offre, o.titre,o.description, o.mission, o.duree, o.date_priseDP,o.salaire, o.profil_recherche, e.nom,ad.ville,ap.type,et.niveau, p.statut\n' +
-            'FROM Postuler p\n' +
-            'JOIN Offre o ON p.id_offre = o.id_offre\n' +
-            'JOIN Entreprise e ON o.id_entreprise = e.id_entreprise\n' +
-            'JOIN Adresse ad ON o.ID_adresse_offre = ad.id_adress\n' +
-            'JOIN Appartement ap ON o.ID_appartement = ap.id_appart\n' +
-            'JOIN Etude et ON o.id_etude = et.id_etude\n' +
-            'WHERE p.id_eleve = ?\n' +
-            'ORDER BY p.id_offre;', idEtudiant);
+        const result  = await conn.query('SELECT * FROM Postuler WHERE id_eleve = ?;',idEtudiant)
 
 
         res.status(200).send(result)
     }
     catch(error){
-        res.status(404).send("Erreur la récupération des candidatures n'a pas été effectué.")
+        res.status(500).send(error.message)
     }
     finally {
-        if (conn) conn.end(); // libère la connexion
+        if (conn) await conn.end(); // libère la connexion
     }
 
 });
 
-app.post("/apiFio/removeCandidature", async (req, res, next) => {
+app.post("/apiBryan/removeCandidature", async (req, res, next) => {
     let conn;
 
     try {
@@ -250,7 +266,7 @@ app.post("/apiFio/removeCandidature", async (req, res, next) => {
         const { id_eleve, id_offre } = req.body;
 
         conn = await pool.getConnection();
-        const Avant = await pool.query('DELETE FROM Postuler WHERE id_eleve = ? AND id_offre = ?;',[id_eleve, id_offre]);
+        const Avant = await conn.query('DELETE FROM Postuler WHERE id_eleve = ? AND id_offre = ?;',[id_eleve, id_offre]);
 
         res.status(200).send()
 
@@ -261,7 +277,7 @@ app.post("/apiFio/removeCandidature", async (req, res, next) => {
 
 
     } finally {
-        if (conn) conn.end();
+        if (conn) await conn.end();
     }
 });
 

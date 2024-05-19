@@ -74,7 +74,7 @@ export default function Destination({isVisible}){
             </tr></tbody></table>
 
 
-            <MesCandidatures isVisible = {candidatureVisible}/>
+
 
         </>
     ):null;
