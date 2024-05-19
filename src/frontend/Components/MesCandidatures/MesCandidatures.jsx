@@ -14,6 +14,7 @@ export default function MesCandidatures({isVisible}) {
 
 
         const fetchData = async () => {
+            console.log("recuperation des candidatures");
 
             let id_eleve ;
 
@@ -66,9 +67,12 @@ export default function MesCandidatures({isVisible}) {
     }, [authState.user]);
 
 
+
     useEffect(() => {
         fetchData().then();
-    }, []);
+    }, [isVisible]);
+
+
 
 
 
