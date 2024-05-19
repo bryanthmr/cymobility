@@ -32,7 +32,7 @@ export default function Offre({isVisible,afficherCandidatures,choixDest,choixSpe
                 });
         }
         fetchData().then();
-        }, [choixDest,choixSpe]);
+    }, [choixDest,choixSpe]);
 
     const [showModal, setShowModal] = useState(false);
     const [selectedOffre, setSelectedOffre] = useState("");

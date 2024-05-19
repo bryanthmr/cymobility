@@ -9,21 +9,19 @@ export default function MesCandidatures({isVisible}) {
     const [listeCandidatures, setListeCandidatures] = useState([]);
 
 
-    const fetchData = async () => {
-        try {
-            const response = await fetch("https://cymobility.go.yo.fr/apiFio/mesCandidatures");
-            const result = await response.json();
-            setListeCandidatures(result);
-        } catch (error) {
-            console.log("error");
+        const fetchData = async () => {
+            try {
+                const response = await fetch("https://cymobility.go.yo.fr/apiBryan/mesCandidatures");
+                const result = await response.json();
+                setListeCandidatures(result);
+            } catch (error) {
+                console.log(error);
+            }
         }
-    }
 
-
-
-    useEffect(() => {
-        fetchData();
-    }, []);
+        useEffect(() => {
+        fetchData().then();
+        }, []);
 
     const [showModal, setShowModal] = useState(false);
     const [selectedCandidature, setSelectedCandidature] = useState(null);
@@ -51,7 +49,7 @@ export default function MesCandidatures({isVisible}) {
                 id_offre: selectedCandidature.id_offre
             };
 
-            await fetch("https://cymobility.go.yo.fr/apiFio/removeCandidature", {
+            await fetch("https://cymobility.go.yo.fr/apiBryan/removeCandidature", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

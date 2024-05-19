@@ -16,7 +16,7 @@ export default function Signin({ isVisible, showLogin }) {
         console.log("Fetching data with credentials:", credentials);
 
         try {
-            const response = await fetch("https://cymobility.go.yo.fr/apiEya/inscription", {
+            const response = await fetch("https://cymobility.go.yo.fr/apiBryan/inscription", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
