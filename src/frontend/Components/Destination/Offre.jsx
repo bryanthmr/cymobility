@@ -71,7 +71,7 @@ export default function Offre({isVisible,afficherCandidatures,choixDest,choixSpe
                 statut : 'Transmis'
             };
             // Envoi de la nouvelle adresse à la route POST
-            await fetch("https://cymobility.go.yo.fr/apiFio/addCandidature", {
+            await fetch("https://cymobility.go.yo.fr/apiBryan/addCandidature", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

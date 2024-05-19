@@ -12,31 +12,26 @@ export default function MesCandidatures({isVisible}) {
 
 
 
-    useEffect(() => {
+
         const fetchData = async () => {
 
-                /*
-                const IdEleve = authState.user.id;
-                const response = await fetch("https://cymobility.go.yo.fr/apiBryan/mesCandidatures", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(IdEleve),
-                })
+            let id_eleve ;
 
-                //const response = await fetch("https://cymobility.go.yo.fr/apiBryan/mesCandidatures");
-               const result = await response.json();
-                setListeCandidatures(result);
+            if(authState.loggedIn){
 
-                 */
+                 id_eleve = {
+                    id_eleve: authState.user.id
+                };
+
+            }else{
+
+                id_eleve = {
+                    id_eleve: '0'
+                };
 
 
+            }
 
-
-                    const id_eleve = {
-                        id_eleve: '2',
-                    };
 
 
 
@@ -66,9 +61,16 @@ export default function MesCandidatures({isVisible}) {
 
         }
 
+    useEffect(() => {
+        fetchData().then();
+    }, [authState.user]);
 
+
+    useEffect(() => {
         fetchData().then();
     }, []);
+
+
 
     const [showModal, setShowModal] = useState(false);
     const [selectedCandidature, setSelectedCandidature] = useState(null);
@@ -91,10 +93,24 @@ export default function MesCandidatures({isVisible}) {
 
         // Si l'utilisateur confirme
         if (confirmation) {
-            const aSupp = {
-                id_eleve: "2", //FIO
-                id_offre: selectedCandidature.id_offre
-            };
+
+            let aSupp ;
+
+            if(authState.loggedIn){
+
+                aSupp = {
+                    id_eleve: authState.user.id,
+                    id_offre: selectedCandidature.id_offre
+                };
+
+            }else{
+                aSupp = {
+                    id_eleve: '0',
+                    id_offre: selectedCandidature.id_offre
+                };
+
+
+            }
 
             await fetch("https://cymobility.go.yo.fr/apiBryan/removeCandidature", {
                 method: 'POST',
@@ -107,7 +123,7 @@ export default function MesCandidatures({isVisible}) {
                     if (!response.ok) {
                         throw new Error('Erreur lors de la suppression de candi2');
                     }
-                    //await fetchData();
+                    await fetchData();
                     handleCloseModal();
                 })
                 .catch(error => {
