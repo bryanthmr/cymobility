@@ -96,7 +96,7 @@ const Header = () => {
     const handleLogout = () => {
         localStorage.removeItem('user');
         setAuthState({ loggedIn: false, user: null });
-        setActualComponent('accueil');
+        handleVisible('accueil', true);
     };
 
     // printing

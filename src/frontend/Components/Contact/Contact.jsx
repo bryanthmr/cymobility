@@ -4,6 +4,8 @@ import "./Contact.css";
 
 export default function Contact({isVisible}){
 
+
+
     return isVisible?(
         <div className="contact-page">
             <>
@@ -21,7 +23,7 @@ export default function Contact({isVisible}){
                     </div>
 
                     <div id={'formContent'}>
-                        <form id={'contactForm'} method={'POST'} action={'#'}>
+                        <form id={'contactForm'}>
                             <div className={'form-row'}>
                                 <div>
                                     <label htmlFor={'nom'}>Nom</label>
@@ -44,7 +46,7 @@ export default function Contact({isVisible}){
                                     <input style={{height: '80px'}} id={'champContact'} type={'text'} required/>
                                 </div>
                             </div>
-                            <button id={'contactButton'}>Envoyer !</button>
+                            <button id={'contactButton'} >Envoyer !</button>
                         </form>
                     </div>
                 </div>
