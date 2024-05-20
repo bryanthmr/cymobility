@@ -138,7 +138,8 @@ export default function MesCandidatures({isVisible}) {
     }
 
     return isVisible? (
-        <div className='container'>
+        <div className='container' >
+
             <h1 className='title'>Mes Candidatures</h1>
             <br/>
             <br/>
@@ -162,7 +163,7 @@ export default function MesCandidatures({isVisible}) {
             </table>
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{selectedCandidature && selectedCandidature.titre }</Modal.Title>
+                    <Modal.Title>{selectedCandidature && selectedCandidature.titre}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {selectedCandidature && (
@@ -172,7 +173,8 @@ export default function MesCandidatures({isVisible}) {
                             <p><strong>Mission:</strong> {selectedCandidature.mission}</p>
                             <p><strong>Profil recherché:</strong> {selectedCandidature.profil_recherche}</p>
                             <p><strong>Niveau:</strong> {selectedCandidature.niveau}</p>
-                            <p><strong>Date de prise de poste:</strong> {format(new Date(selectedCandidature.date_priseDP), 'dd/MM/yyyy')}</p>
+                            <p><strong>Date de prise de
+                                poste:</strong> {format(new Date(selectedCandidature.date_priseDP), 'dd/MM/yyyy')}</p>
                             <p><strong>Ville:</strong> {selectedCandidature.ville}</p>
                             <p><strong>Durée:</strong> {selectedCandidature.duree} mois</p>
                             <p><strong>Appartement mise à votre disposition:</strong> {selectedCandidature.type}</p>
@@ -181,11 +183,11 @@ export default function MesCandidatures({isVisible}) {
                     )}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={ handleRetirerClick}>
+                    <Button onClick={handleRetirerClick}>
                         Retirer Candidature
                     </Button>
                 </Modal.Footer>
             </Modal>
         </div>
-    ):null;
+    ) : null;
 }

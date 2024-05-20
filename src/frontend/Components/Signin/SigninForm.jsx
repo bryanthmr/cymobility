@@ -36,9 +36,9 @@ export default function Signin({ isVisible, showLogin }) {
             console.log("Response data:", data);
 
             if (data.success) {
-                console.log('Inscription réussie');
+                window.confirm('Inscription réussie. Veuillez vous connecter.');
             } else {
-                console.log('Échec de l\'inscription');
+                window.confirm('Échec de l\'inscription');
             }
         } catch (error) {
             console.error('Erreur de connexion:', error);
