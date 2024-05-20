@@ -115,7 +115,7 @@ const Header = () => {
                     <div className='connexion-button'>
                         {authState.loggedIn ? (
                             <>
-                                <span>Bienvenue, {authState.user.name}</span>
+
                                 <button onClick={() => handleVisible('mesCandidatures', true)}>Mes candidatures</button>
                                 <button onClick={handleLogout}>Se déconnecter</button>
                             </>

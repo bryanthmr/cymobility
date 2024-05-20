@@ -89,7 +89,7 @@ app.post('/apiBryan/inscription', async (req, res, next) => {
     try {
         const { nom1, nom2, mail, idEleve, password, date, niveauEtude } = req.body;
         conn = await pool.getConnection();
-        const result = await conn.query('INSERT INTO Eleve (nom, prenom, mail, id_eleve, mdp, date, id_etude) VALUES (?, ?, ?, ?, ?, ?, (SELECT id_etude FROM Etude WHERE niveau = ?))', [nom1, nom2, mail, idEleve, password, date, niveauEtude]);
+        const result = await conn.query('INSERT INTO Eleve (nom, prenom, mail, id_eleve, mdp, date,niveau) VALUES (?, ?, ?, ?, ?, ?,?)', [nom1, nom2, mail, idEleve, password, date, niveauEtude]);
         res.status(200).send({ success: true, message: 'Inscription réussie' });
     } catch (error) {
         console.error('Database error:', error);
