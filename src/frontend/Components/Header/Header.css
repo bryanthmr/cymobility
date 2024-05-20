@@ -9,6 +9,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 /* Boutons dans le header */
 .menu-buttons {
@@ -67,6 +68,33 @@
 
 .contact {
     color: white;
-    z-index: 1;
     background: #1a1d21;
 }
+
+.ContactInfo {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.ContactInfo h3#mail {
+    text-align: center;
+    font-size: 25px;
+    margin-left: 12px;
+    padding-bottom: 50px;
+}
+
+.ContactInfo h3#ville {
+    margin-right: 20%;
+    font-size: 25px;
+}
+
+div#divTitre {
+    padding-bottom: 30px;
+}
+
+.ContactInfo h3#num{
+    margin-left: 20%;
+    font-size: 25px;
+}
+

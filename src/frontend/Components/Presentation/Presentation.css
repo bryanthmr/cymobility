@@ -1,0 +1,20 @@
+.presentation{
+    #presentation-background {
+        background: #292F36;
+        width: 100%;
+        z-index: 1000;
+        border-bottom: 2px solid #f0f5d9;
+    }
+
+    h1,p{
+        font-family: fraunces, serif;
+        text-align: center;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        color:white;
+    }
+
+    p{
+        font-size: 20px;
+    }
+}
