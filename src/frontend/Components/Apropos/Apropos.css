@@ -1,9 +1,9 @@
 .apropos-page .main-section {
     display: flex;
     justify-content: center;
-    height: calc(100vh - 60px);
+    min-height: calc(100vh - 60px);
+    /* Adjust height to allow content to expand */
 }
-
 
 .apropos-page .right-compartment {
     flex: 2;
@@ -11,38 +11,37 @@
     color: black;
     padding: 20px;
     width: 70%;
-    margin-bottom:0px;
+    margin-bottom: 0;
     padding-top: 10px;
+    min-height: calc(100vh - 60px); /* Ensure it takes at least the full viewport height */
 }
-
 
 .apropos-page .right-compartment > h2 {
-    font-size:40px;
+    font-size: 40px;
     padding: 50px;
-    margin-left:40%;
-    color:purple;
+    margin-left: 40%;
+    color: purple;
     font-family: "Linotype Didot", serif;
 }
-.apropos-page h3{
+
+.apropos-page h3 {
     font-size: 22px;
     font-family: "Linotype Didot", serif;
-    letter-spacing: 0.2px!important;
+    letter-spacing: 0.2px !important;
     padding-left: 60px;
 }
-.apropos-page p{
+
+.apropos-page p {
     font-size: 18px;
-    font-family:"Linotype Didot", serif;
-    letter-spacing: 0.2px!important;
-    padding-left:60px;
-    padding-right:100px;
-
-
+    font-family: "Linotype Didot", serif;
+    letter-spacing: 0.2px !important;
+    padding-left: 60px;
+    padding-right: 100px;
 }
 
-
-.logo2{
+.logo2 {
     width: 400px;
     height: 300px;
     margin-left: 43%;
-
+    padding-bottom: initial;
 }

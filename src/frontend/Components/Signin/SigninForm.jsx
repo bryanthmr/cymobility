@@ -10,6 +10,10 @@ export default function Signin({ isVisible, showLogin }) {
     const [idEleve, setIdEleve] = useState('');
     const [password, setPassword] = useState('');
     const [niveauEtude, setNiveauEtude] = useState('');
+    const today = new Date();
+    const maxDate = new Date();
+    maxDate.setFullYear(today.getFullYear() - 18);
+    const maxDateStr = maxDate.toISOString().split('T')[0];
 
     const fetchData = async () => {
         const credentials = { nom1, nom2, mail, idEleve, password, date, niveauEtude };
@@ -70,7 +74,7 @@ export default function Signin({ isVisible, showLogin }) {
                             <FaLock className="icon" />
                         </div>
                         <div className="input-box">
-                            <input onChange={(e) => setDate(e.target.value)} value={date} type="date" placeholder='Date de naissance' required />
+                            <input onChange={(e) => setDate(e.target.value)} value={date} type="date" placeholder='Date de naissance' required  max={maxDateStr} min="1900-01-01"/>
                         </div>
                         <div className="input-box">
                             <div className="select-container">
